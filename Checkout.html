@@ -185,22 +185,30 @@
 }
 
 @media (max-width: 768px) {
+
+  /* keep everything stacked vertically */
   .checkout-wrapper {
     flex-direction: column;
     align-items: center;
     padding: 0 15px;
   }
 
+  /* 👉 1. show Order Summary first */
+  .order-summary {
+    order: -1;        /* puts it before .checkout-container */
+    position: static; /* cancels sticky so it no longer overlays */
+    top: auto;        /* just a safeguard */
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 30px; /* bottom-gap before the form */
+  }
+
+  /* 👉 2. form stays second */
   .checkout-container {
+    order: 0;
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-  }
-
-  .order-summary {
-    width: 100%;
-    max-width: 500px;
-    margin-top: 30px;
   }
 
   .form-row {
