@@ -10,76 +10,294 @@
   <!-- Optionally include font awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <style>
-    .wishlist-empty-message {
+ <style>
+  .container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  }
+
+  h1 {
     text-align: center;
-    padding: 40px 20px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.wishlist-empty-message h2 {
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.wishlist-empty-message p {
-    color: #666;
+    font-size: 28px;
+    color: #343a40;
     margin-bottom: 25px;
-    font-size: 16px;
-}
+  }
 
-.wishlist-empty-message .button {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: #026;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
+  .wishlist-header,
+  .wishlist-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 15px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .wishlist-header {
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    background-color: #f9f9f9;
+  }
+
+  .wishlist-item img {
+    width: 100%;
+    max-width: 60px;
+    border-radius: 6px;
+  }
+
+  .product-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    flex-wrap: wrap;
+  }
+
+  .product-info span {
+    font-weight: 500;
+  }
+
+  .date-added {
+    font-size: 14px;
+    color: #555;
+    word-break: break-word;
+  }
+
+  .action-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .btn {
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
     transition: background-color 0.3s;
-}
+    white-space: nowrap;
+  }
 
-.wishlist-empty-message .button:hover {
-    background-color: #286090;
+  .btn-cart {
+    background-color: #002366;
+    color: #fff;
+  }
+
+  .btn-cart:hover {
+    background-color: #002377;
+  }
+
+  .btn-remove {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .btn-remove:hover {
+    background-color: #c82333;
+  }
+
+  .empty-msg {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #777;
+    padding: 60px 0;
+  }
+
+  .empty-msg a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .empty-msg a:hover {
+    text-decoration: underline;
+  }
+
+  .back-to-shop-btn {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    margin-top: 6px;
+    padding: 6px 12px;
+    background-color: #ccc;
+    border-radius: 6px;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  .back-to-shop-btn:hover {
+    background-color: #bbb;
+  }
+
+  /* Responsive adjustments (fluid layout, no scroll) */
+  @media (max-width: 768px) {
+    .wishlist-header,
+    .wishlist-item {
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn {
+      font-size: 13px;
+      padding: 5px 8px;
+    }
+
+    .product-info {
+      font-size: 13px;
+    }
+
+    .date-added {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .wishlist-header,
+    .wishlist-item {
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 6px;
+    }
+
+    .btn {
+      font-size: 12px;
+      padding: 5px 6px;
+    }
+
+    .product-info span {
+      font-size: 12px;
+    }
+
+    .date-added {
+      font-size: 12px;
+    }
+
+    .product-info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .badge {
+  background: #ffd700;
+  color: #000;
+  font-size: 0.5rem;
+  border-radius: 50%;
+  padding: 0.2rem 0.4rem;
+  position: absolute;
+  top: 30px;
+  right: 21px;
+  display: none;
 }
-  </style>
+</style>
+
   
 </head>
 <body>
 
   <header class="navbar">
+    <div class="mobile-header">
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="logo"><span>Elegant Events</span></div>
+      <a href="cart.html" style="color: white;"><i class="fa-solid fa-cart-shopping"></i><span id="cart-count" class="badge">0</span></a>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="close-btn" onclick="toggleMobileMenu()">&times;</button>
+      <button class="close-btn" onclick="closeMobileMenu()">×</button>
+      <a href="index.html">Home</a>
+      <a href="Shop.html" onclick="sessionStorage.setItem('openFilterOnLoad', 'true')">Shop</a>
+      <a href="Offers.html">Offers</a>
+      <a href="WholeSale.html">Whole Sale</a>
+      <a href="AboutUS.html">About Us</a>
+      <a href="ContactUs.html">Contact Us</a>
+      <a href="order-tracking.html">Order Tracking</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-and-conditions.html">Terms and Conditions</a>
+    </div>
+
     <div class="navbar-top">
       <div class="logo">
-        <!-- <img src="https://via.placeholder.com/50" alt="Elegant Events" /> -->
         <span>Elegant Events</span>
       </div>
       <div class="search-bar">
-        <select>
-          <option>All</option>
-        </select>
-        <input type="text" placeholder="Search your favorite product..." />
-        <button>Search</button>
-      </div>
+  <div class="dropdown-container">
+    <select id="category-select">
+      <option selected>All</option>
+    </select>
+  </div>
+  <input type="text" id="searchInput" placeholder="Search your favorite product..." />
+<button onclick="handleSearch()">Search</button>
+</div>
+
+<script>
+  function handleSearch() {
+    const searchTerm = document.getElementById("searchInput").value.trim();
+    localStorage.setItem("searchTerm", searchTerm);
+    window.location.href = "Shop.html";
+  }
+</script>
+<script>
+  // Function to store the search and redirect
+  function handleSearch() {
+    const searchTerm = document.getElementById("searchInput").value.trim();
+    if (searchTerm) {
+      localStorage.setItem("searchTerm", searchTerm);
+      window.location.href = "Shop.html";
+    }
+  }
+
+  // Handle Enter key on search input
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("searchInput");
+    if (input) {
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          handleSearch();
+        }
+      });
+    }
+  });
+</script>
+
+
       <div class="icons">
         <div class="icon-item">
-          <a href="Login.html" style="color: white; text-decoration: none;"><i class="fa-regular fa-user"></i></a>
-          <a href="Login.html" style="color: white; text-decoration: none;"><span>Sign In<br/>Account</span></a>
+          <a href="Login.html" style="color: white; text-decoration: none;">
+            <i class="fa-regular fa-user"></i>
+          </a>
+          <a href="Login.html" style="color: white; text-decoration: none;">
+            <span>Sign In<br />Account</span>
+          </a>
         </div>
-        <div class="icon-item">
-          <a href="Wishlist.html" style="color: white; text-decoration: none;"><i class="fa-regular fa-heart"></i></a>
+
+        <div class="icon-item" style="position: relative;">
+          <a href="wishlist.html" style="color: white; text-decoration: none;">
+            <i class="fa-regular fa-heart"></i>
+            <span id="wishlist-count" style="position: absolute; top: -11px; right: -11px; background: #ffd700; color: #000; font-size: 9px; padding: 2px 6px; border-radius: 50%;">0</span>
+          </a>
         </div>
-        <div class="icon-item">
-          <a href="Cart.html" style="color: white; text-decoration: none;"><i class="fa-solid fa-cart-shopping"></i></a>
-          <a href="Cart.html" style="color: white; text-decoration: none;"><span>Total<br/>Rs0.00</span></a>
+
+        <div class="icon-item" style="position: relative;">
+          <a href="cart.html" style="color: white; text-decoration: none;">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count" style="position: absolute; top: -11px; right: -11px; background: #ffd700; color: #000; font-size: 9px; padding: 2px 6px; border-radius: 50%;">0</span>
+          </a>
         </div>
       </div>
     </div>
+
     <div class="navbar-bottom">
-      <div class="categories-dropdown">
-        <i class="fa-solid fa-bars"></i>
-        <span>All Categories</span>
-        <i class="fa-solid fa-chevron-down"></i>
-      </div>
       <nav>
         <a href="index.html">Home</a>
         <a href="Shop.html">Shop</a>
@@ -88,13 +306,68 @@
         <a href="AboutUS.html">About Us</a>
         <a href="ContactUs.html">Contact Us</a>
       </nav>
-      <div class="super-discount">
-        <i class="fa-solid fa-percent"></i>
-        <span>Only this weekend<br/>Super Discount</span>
-        <i class="fa-solid fa-chevron-down"></i>
-      </div>
     </div>
   </header>
+
+  <div class="mobile-nav">
+    <a href="Shop.html" onclick="sessionStorage.setItem('openFilterOnLoad', 'true')">
+  <i class="fas fa-store"></i>Store
+</a>
+
+    <a href="#"><i class="fas fa-search"></i>Search</a>
+    <a href="wishlist.html"><i class="far fa-heart"></i>Wishlist</a>
+    <a href="Login.html"><i class="far fa-user"></i>Account</a>
+  </div>
+
+  <script>
+  const menu = document.getElementById('mobileMenu');
+
+  function toggleMobileMenu() {
+    menu.classList.toggle('open');
+  }
+
+  function closeMobileMenu() {
+    menu.classList.remove('open');
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const isClickInsideMenu = menu.contains(event.target);
+    const isHamburger = event.target.closest('.mobile-menu-toggle');
+    
+    if (!isClickInsideMenu && !isHamburger && menu.classList.contains('open')) {
+      closeMobileMenu();
+    }
+  });
+</script>
+
+<!-- Script to update cart & wishlist -->
+<script>
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCounters = document.querySelectorAll("#cart-count");
+
+    cartCounters.forEach(el => {
+      el.textContent = total;
+      el.style.display = total > 0 ? "inline-block" : "none";
+    });
+  }
+
+  function updateWishlistCount() {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const wishlistCounters = document.querySelectorAll("#wishlist-count");
+
+    wishlistCounters.forEach(el => {
+      el.textContent = wishlist.length;
+      el.style.display = wishlist.length > 0 ? "inline-block" : "none";
+    });
+  }
+
+  updateCartCount();
+  updateWishlistCount();
+</script>
+
 
   <div class="promo-slider">
         <div class="slider-track">
@@ -102,11 +375,78 @@
         </div>
     </div>
 
-    <div class="wishlist-empty-message">
-    <h2>Your Wishlist is Empty</h2>
-    <p>You haven't added any products to your favorites yet. Start exploring our collection and save your favorite items!</p>
-    <a href="Shop.html" class="button">Browse Products</a>
-</div>
+  <div class="container">
+    <h1>Your Wishlist</h1>
+    <div id="wishlist-container"></div>
+  </div>
+
+  <script>
+    const wishlistContainer = document.getElementById("wishlist-container");
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    function renderWishlist() {
+      if (wishlist.length === 0) {
+        wishlistContainer.innerHTML = `
+          <div class="empty-msg">
+            Your wishlist is empty.<br>
+            <a href="Shop.html">Return to Shop</a>
+          </div>
+        `;
+        return;
+      }
+
+      let html = `
+        <div class="wishlist-header">
+          <div>Product</div>
+          <div>Price</div>
+          <div>Date Added</div>
+          <div>Actions</div>
+        </div>
+      `;
+
+      wishlist.forEach((item, index) => {
+        html += `
+          <div class="wishlist-item">
+            <div class="product-info">
+              <img src="${item.image}" alt="${item.name}" />
+              <span>${item.name}</span>
+            </div>
+            <div>Rs. ${item.price}</div>
+            <div class="date-added">${item.dateAdded}</div>
+            <div class="action-btns">
+              <button class="btn btn-cart" onclick="addToCart(${index})">Add to Cart</button>
+              <button class="btn btn-remove" onclick="removeWishlistItem(${index})">Remove</button>
+              </div>
+              <a href="Shop.html" class="back-to-shop-btn">← Back to Shop</a>
+          </div>
+        `;
+      });
+
+      wishlistContainer.innerHTML = html;
+    }
+
+    function removeWishlistItem(index) {
+      wishlist.splice(index, 1);
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      renderWishlist();
+    }
+
+    function addToCart(index) {
+      const item = wishlist[index];
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const exists = cart.find(p => p.name === item.name);
+      if (!exists) {
+        cart.push({ ...item, quantity: 1 });
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+
+      window.location.href = "cart.html";
+    }
+
+    renderWishlist();
+  </script>
+
 
   <section class="newsletter-section">
         <h2 class="newsletter-header">Be The First To Get Discounts</h2>
@@ -167,36 +507,73 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Chat -->
-<div style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-">
-  <a href="https://wa.me/923332243753" target="_blank" style="
+<!-- WhatsApp Floating Chat -->
+<div class="whatsapp-chat">
+  <a href="https://wa.me/923332243753" target="_blank" class="whatsapp-link">
+    <span class="chat-text">Need Help? <strong>Chat with us</strong></span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="chat-icon" />
+  </a>
+</div>
+
+<style>
+  .whatsapp-chat {
+    position: fixed;
+    bottom: 70px;
+    right: 10px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+  }
+
+  .whatsapp-link {
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 40px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     text-decoration: none;
-    padding: 10px 15px;
-    color: #333;
-    font-size: 15px;
-  ">
-    <span style="margin-right: 10px;">Need Help? <strong>Chat with us</strong></span>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background: #25D366;
-      padding: 6px;
-    ">
-  </a>
-</div>
+    padding: 12px 18px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .whatsapp-link:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .chat-text {
+    margin-right: 12px;
+    white-space: nowrap;
+  }
+
+  .chat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #25D366;
+    padding: 5px;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 600px) {
+    .whatsapp-link {
+      padding: 10px 14px;
+      font-size: 14px;
+    }
+
+    .chat-text {
+      display: none;
+    }
+
+    .chat-icon {
+      width: 38px;
+      height: 38px;
+      padding: 4px;
+    }
+  }
+</style>
 
 
 </body>

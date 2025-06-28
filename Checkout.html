@@ -11,81 +11,319 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
        
-  <!-- <style>
-        .checkout-container {
-            display: flex;
-        }
-        .billing-details, .order-summary {
-            padding: 20px;
-        }
-        .billing-details {
-            width: 60%;
-        }
-        .order-summary {
-            width: 40%;
-            background-color: #f5f5f5;
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            box-sizing: border-box;
-        }
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .place-order-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        .place-order-btn:hover {
-            background-color: #45a049;
-        }
-    </style> -->
+<style>
+  
+    .checkout-wrapper {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .checkout-container {
+      flex: 2;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .order-summary {
+      flex: 1;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 80px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #002366;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    /* input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #fdfdfd;
+    } */
+
+    input[type="file"] {
+      padding: 8px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox-group input {
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #002366;
+      color: #FFD700;
+      padding: 14px;
+      /* font-size: 1.1rem; */
+      border: none;
+      /* border-radius: 8px; */
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #002366;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #ccc;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding-top: 15px;
+      border-top: 2px solid #ccc;
+      margin-top: 20px;
+    }
+
+    .summary-empty {
+      text-align: center;
+      color: #999;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .checkout-wrapper {
+        flex-direction: column;
+      }
+    }
+    
+
+
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #002366;
+  padding: 10px 15px;
+  position: relative;
+}
+
+.mobile-header-left,
+.mobile-header-center,
+.mobile-header-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-header-left {
+  justify-content: flex-start;
+}
+
+.mobile-header-right {
+  justify-content: flex-end;
+}
+
+.mobile-header .logo span {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+#cart-count.badge {
+  background: #ffd700;
+  color: #000;
+  font-size: 0.5rem;
+  border-radius: 50%;
+  padding: 0.2rem 0.4rem;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .checkout-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+  }
+
+  .checkout-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .order-summary {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 30px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+  </style>
   
 </head>
 <body>
 
   <header class="navbar">
+    <div class="mobile-header">
+  <div class="mobile-header-left">
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="mobile-header-center">
+    <div class="logo">
+      <span>Elegant Events</span>
+    </div>
+  </div>
+
+  <div class="mobile-header-right">
+    <a href="cart.html" style="color: white; position: relative;">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-count" class="badge">0</span>
+    </a>
+  </div>
+</div>
+
+
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="close-btn" onclick="toggleMobileMenu()">&times;</button>
+      <button class="close-btn" onclick="closeMobileMenu()">×</button>
+      <a href="index.html">Home</a>
+      <a href="Shop.html" onclick="sessionStorage.setItem('openFilterOnLoad', 'true')">Shop</a>
+      <a href="Offers.html">Offers</a>
+      <a href="WholeSale.html">Whole Sale</a>
+      <a href="AboutUS.html">About Us</a>
+      <a href="ContactUs.html">Contact Us</a>
+      <a href="order-tracking.html">Order Tracking</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-and-conditions.html">Terms and Conditions</a>
+    </div>
+
     <div class="navbar-top">
       <div class="logo">
-        <!-- <img src="https://via.placeholder.com/50" alt="Elegant Events" /> -->
         <span>Elegant Events</span>
       </div>
       <div class="search-bar">
-        <select>
-          <option>All</option>
-        </select>
-        <input type="text" placeholder="Search your favorite product..." />
-        <button>Search</button>
-      </div>
+  <div class="dropdown-container">
+    <select id="category-select">
+      <option selected>All</option>
+    </select>
+  </div>
+  <input type="text" id="searchInput" placeholder="Search your favorite product..." />
+<button onclick="handleSearch()">Search</button>
+</div>
+
+<script>
+  function handleSearch() {
+    const searchTerm = document.getElementById("searchInput").value.trim();
+    localStorage.setItem("searchTerm", searchTerm);
+    window.location.href = "Shop.html";
+  }
+</script>
+<script>
+  // Function to store the search and redirect
+  function handleSearch() {
+    const searchTerm = document.getElementById("searchInput").value.trim();
+    if (searchTerm) {
+      localStorage.setItem("searchTerm", searchTerm);
+      window.location.href = "Shop.html";
+    }
+  }
+
+  // Handle Enter key on search input
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("searchInput");
+    if (input) {
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          handleSearch();
+        }
+      });
+    }
+  });
+</script>
+
+
       <div class="icons">
         <div class="icon-item">
-          <a href="Login.html" style="color: white; text-decoration: none;"><i class="fa-regular fa-user"></i></a>
-          <a href="Login.html" style="color: white; text-decoration: none;"><span>Sign In<br/>Account</span></a>
+          <a href="Login.html" style="color: white; text-decoration: none;">
+            <i class="fa-regular fa-user"></i>
+          </a>
+          <a href="Login.html" style="color: white; text-decoration: none;">
+            <span>Sign In<br />Account</span>
+          </a>
         </div>
-        <div class="icon-item">
-          <a href="Wishlist.html" style="color: white; text-decoration: none;"><i class="fa-regular fa-heart"></i></a>
+
+        <div class="icon-item" style="position: relative;">
+          <a href="wishlist.html" style="color: white; text-decoration: none;">
+            <i class="fa-regular fa-heart"></i>
+            <span id="wishlist-count" style="position: absolute; top: -11px; right: -11px; background: #ffd700; color: #000; font-size: 9px; padding: 2px 6px; border-radius: 50%;">0</span>
+          </a>
         </div>
-        <div class="icon-item">
-          <a href="Cart.html" style="color: white; text-decoration: none;"><i class="fa-solid fa-cart-shopping"></i></a>
-          <a href="Cart.html" style="color: white; text-decoration: none;"><span>Total<br/>Rs0.00</span></a>
+
+        <div class="icon-item" style="position: relative;">
+          <a href="cart.html" style="color: white; text-decoration: none;">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count" style="position: absolute; top: -11px; right: -11px; background: #ffd700; color: #000; font-size: 9px; padding: 2px 6px; border-radius: 50%;">0</span>
+          </a>
         </div>
       </div>
     </div>
+
     <div class="navbar-bottom">
-      <div class="categories-dropdown">
-        <i class="fa-solid fa-bars"></i>
-        <span>All Categories</span>
-        <i class="fa-solid fa-chevron-down"></i>
-      </div>
       <nav>
         <a href="index.html">Home</a>
         <a href="Shop.html">Shop</a>
@@ -94,13 +332,67 @@
         <a href="AboutUS.html">About Us</a>
         <a href="ContactUs.html">Contact Us</a>
       </nav>
-      <div class="super-discount">
-        <i class="fa-solid fa-percent"></i>
-        <span>Only this weekend<br/>Super Discount</span>
-        <i class="fa-solid fa-chevron-down"></i>
-      </div>
     </div>
   </header>
+
+  <div class="mobile-nav">
+    <a href="Shop.html" onclick="sessionStorage.setItem('openFilterOnLoad', 'true')">
+  <i class="fas fa-store"></i>Store
+</a>
+    <a href="#"><i class="fas fa-search"></i>Search</a>
+    <a href="wishlist.html"><i class="far fa-heart"></i>Wishlist</a>
+    <a href="Login.html"><i class="far fa-user"></i>Account</a>
+  </div>
+
+  <script>
+  const menu = document.getElementById('mobileMenu');
+
+  function toggleMobileMenu() {
+    menu.classList.toggle('open');
+  }
+
+  function closeMobileMenu() {
+    menu.classList.remove('open');
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const isClickInsideMenu = menu.contains(event.target);
+    const isHamburger = event.target.closest('.mobile-menu-toggle');
+    
+    if (!isClickInsideMenu && !isHamburger && menu.classList.contains('open')) {
+      closeMobileMenu();
+    }
+  });
+</script>
+
+<!-- Script to update cart & wishlist -->
+<script>
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCounters = document.querySelectorAll("#cart-count");
+
+    cartCounters.forEach(el => {
+      el.textContent = total;
+      el.style.display = total > 0 ? "inline-block" : "none";
+    });
+  }
+
+  function updateWishlistCount() {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const wishlistCounters = document.querySelectorAll("#wishlist-count");
+
+    wishlistCounters.forEach(el => {
+      el.textContent = wishlist.length;
+      el.style.display = wishlist.length > 0 ? "inline-block" : "none";
+    });
+  }
+
+  updateCartCount();
+  updateWishlistCount();
+</script>
+
 
   <div class="promo-slider">
         <div class="slider-track">
@@ -108,67 +400,131 @@
         </div>
     </div>
 
-    <!-- <h1>Checkout</h1>
-    
+   <div class="checkout-wrapper">
     <div class="checkout-container">
-        <div class="billing-details">
-            <h2>Billing Details</h2>
-            <form>
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="fname" required>
-                
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lname" required>
-                
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" required>
-                
-                <label for="address">Address</label>
-                <textarea id="address" name="address" rows="4" required></textarea>
-                
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" required>
-                
-                <label for="zip">Postal Code</label>
-                <input type="text" id="zip" name="zip" required>
-            </form>
-        </div>
-        
-        <div class="order-summary">
-            <h2>Your Order</h2>
-            <div class="order-item">
-                <span>Yellow Artificial Flower Bunches × 1</span>
-                <span>Rs350.00</span>
-            </div>
-            <div class="order-item">
-                <span>Subtotal</span>
-                <span>Rs350.00</span>
-            </div>
-            <div class="order-item">
-                <span>Shipping</span>
-                <span>To be calculated</span>
-            </div>
-            <div class="order-item">
-                <strong>Total</strong>
-                <strong>Rs350.00</strong>
-            </div>
-            
-            <h3>Payment Method</h3>
-            <div>
-                <input type="radio" id="cod" name="payment" checked>
-                <label for="cod">Cash on Delivery</label>
-            </div>
-            <div>
-                <input type="radio" id="card" name="payment">
-                <label for="card">Credit/Debit Card</label>
-            </div>
-            
-            <button class="place-order-btn">Place Order</button>
-        </div>
-    </div> -->
+      <h2>Billing Details</h2>
+      <form id="checkout-form">
+  <div class="form-group">
+    <label>1) Complete Name *</label>
+    <input type="text" required />
+  </div>
+
+  <div class="form-group">
+    <label>2) Country / Region *</label>
+    <input type="text" required />
+  </div>
+
+  <div class="form-group">
+    <label>3) City *</label>
+    <input type="text" required />
+  </div>
+
+  <div class="form-group">
+    <label>4) Complete Address *</label>
+    <textarea placeholder="Street, House #, Area" required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>5) Mobile No *</label>
+    <input type="tel" required />
+  </div>
+
+  <div class="form-group">
+    <label>6) Select Payment Option *</label>
+    <select id="payment-method" required onchange="togglePaymentOptions()">
+      <option value="">-- Select --</option>
+      <option value="cod">Cash on Delivery (COD)</option>
+      <option value="advance">Advance Payment</option>
+    </select>
+  </div>
+
+  <!-- Advance payment section -->
+  <div id="advance-options" style="display: none;">
+    <div class="form-group">
+      <label><strong>Option 1:</strong></label>
+      <p>Easy Paisa / Jazz Cash<br />
+         <strong>0347--2402330</strong><br />
+         Account Name: <strong>Amaduddin</strong>
+      </p>
+    </div>
+
+    <div class="form-group">
+      <label><strong>Option 2:</strong></label>
+      <p>Bank Alfalah<br />
+         Account No: <strong>55895000732355</strong><br />
+         Account Name: <strong>Amaduddin</strong>
+      </p>
+    </div>
+
+    <div class="form-group">
+      <label>Attach Payment Proof *</label>
+      <input type="file" id="payment-proof" />
+    </div>
+  </div>
+
+  <button type="submit">Place Order</button>
+</form>
+
+    </div>
+
+    <div class="order-summary">
+      <span style="color: #000; text-decoration: underline; font-weight: bolder;">Shipping Charges Upto 1kg = Rs.250</span>  
+      <h2>Your Order</h2>
+      <div id="summary-items"></div>
+      <div class="summary-total" id="order-total">
+        <span>Total:</span>
+        <span>Rs. 0</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const summaryItems = document.getElementById('summary-items');
+    const orderTotal = document.getElementById('order-total');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function loadSummary() {
+      if (cart.length === 0) {
+        summaryItems.innerHTML = '<p class="summary-empty">Your cart is currently empty.</p>';
+        orderTotal.querySelector('span:last-child').textContent = 'Rs. 0';
+        return;
+      }
+
+      let total = 0;
+      let html = '';
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal + 250;
+        html += `
+          <div class="summary-item">
+            <span>${item.name} x ${item.quantity} + ${250}</span>
+            <span>Rs. ${subtotal} + ${250}</span>
+          </div>
+        `;
+      });
+
+      summaryItems.innerHTML = html;
+      orderTotal.querySelector('span:last-child').textContent = `Rs. ${total}`;
+    }
+
+    loadSummary();
+  </script>
+  <script>
+  function togglePaymentOptions() {
+    const method = document.getElementById("payment-method").value;
+    const advanceOptions = document.getElementById("advance-options");
+    const proofInput = document.getElementById("payment-proof");
+
+    if (method === "advance") {
+      advanceOptions.style.display = "block";
+      proofInput.setAttribute("required", "required");
+    } else {
+      advanceOptions.style.display = "none";
+      proofInput.removeAttribute("required");
+    }
+  }
+</script>
+
 
 
   <section class="newsletter-section">
@@ -228,36 +584,74 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Chat -->
-<div style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-">
-  <a href="https://wa.me/923332243753" target="_blank" style="
+<!-- WhatsApp Floating Chat -->
+<div class="whatsapp-chat">
+  <a href="https://wa.me/923332243753" target="_blank" class="whatsapp-link">
+    <span class="chat-text">Need Help? <strong>Chat with us</strong></span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="chat-icon" />
+  </a>
+</div>
+
+<style>
+  .whatsapp-chat {
+    position: fixed;
+    bottom: 70px;
+    right: 10px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+  }
+
+  .whatsapp-link {
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 40px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     text-decoration: none;
-    padding: 10px 15px;
-    color: #333;
-    font-size: 15px;
-  ">
-    <span style="margin-right: 10px;">Need Help? <strong>Chat with us</strong></span>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background: #25D366;
-      padding: 6px;
-    ">
-  </a>
-</div>
+    padding: 12px 18px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .whatsapp-link:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .chat-text {
+    margin-right: 12px;
+    white-space: nowrap;
+  }
+
+  .chat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #25D366;
+    padding: 5px;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 600px) {
+    .whatsapp-link {
+      padding: 10px 14px;
+      font-size: 14px;
+    }
+
+    .chat-text {
+      display: none;
+    }
+
+    .chat-icon {
+      width: 38px;
+      height: 38px;
+      padding: 4px;
+    }
+  }
+</style>
+
 
 </body>
 </html>
