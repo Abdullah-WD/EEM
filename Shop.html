@@ -1,125 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elegant Events</title>
-    <link rel="stylesheet" href="styles.css" />
-    <!-- Use Google Fonts for cleaner look -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Optionally include font awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elegant Events</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Use Google Fonts for cleaner look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Optionally include font awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-     <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
-  <!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    :root {
+      --primary: #002366;
+      --secondary: #3a86ff;
+      --accent: #e67e22;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --success: #28a745;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    /* Header styles (keep your existing header) */
+    
+    .container {
+      display: flex;
+      max-width: 1400px;
+      margin: 2rem auto;
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 250px;
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 1rem;
+      height: fit-content;
+    }
+    
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+    
+    .sidebar h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+    }
+    
+    .category-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .category-list li {
+      padding: 0.75rem 0;
+      cursor: pointer;
+      transition: var(--transition);
+      border-bottom: 1px solid var(--light-gray);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    
+    .category-list li::before {
+      content: '\f054';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      margin-right: 0.75rem;
+      font-size: 0.7rem;
+      color: var(--gray);
+      transition: var(--transition);
+    }
+    
+    .category-list li:hover {
+      color: var(--primary);
+      padding-left: 0.5rem;
+    }
+    
+    .category-list li:hover::before {
+      color: var(--primary);
+    }
+    
+    .category-list li.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    /* Product Grid */
+    .product-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+    
+    .product-img-container {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+    
+    .product-actions {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    .product-card:hover .product-actions {
+      opacity: 1;
+    }
+    
+    .action-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: white;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    
+    .action-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .product-info {
+      padding: 1.25rem;
+    }
+    
+    .product-category {
+      color: var(--gray);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: -webkit-box;
+      /* -webkit-line-clamp: 2; */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 2.8em;
+    }
+    
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .current-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .original-price {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-decoration: line-through;
+    }
+    
+    .add-to-cart {
+      width: 100%;
+      padding: 0.65rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .add-to-cart:hover {
+      background: #002050;
+    }
+    
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    .rating-stars {
+      color: #ffc107;
+      font-size: 0.9rem;
+    }
+    
+    .rating-count {
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+
+    /* Product Grid Header */
+    .product-grid-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding: 0 0.5rem;
+    }
+
+    .product-grid-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .sort-options {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sort-options select {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid var(--light-gray);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        position: static;
+      }
+      
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .product-img-container {
+        height: 160px;
+      }
+
+      .product-info {
+        padding: 1rem;
+      }
+    }
+
+    /* Price Filter */
+    .filter-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--light-gray);
+}
+
+.filter-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+}
+
+.price-range-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+
+.price-slider-container {
+  margin-bottom: 1rem;
+}
+
+.price-slider {
+  width: 100%;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--light-gray);
+  border-radius: 2px;
+  outline: none;
+  margin-bottom: 0.5rem;
+}
+
+.price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.price-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.apply-filter-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.apply-filter-btn:hover {
+  background: #001a4d;
+}
 
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .location-section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        
-        .location-section h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .location-section h2::after {
-            content: '';
-            position: absolute;
-            width: 60%;
-            height: 3px;
-            background: #2c3e50;
-            bottom: -10px;
-            left: 20%;
-        }
-        
-        .map-container {
-            position: relative;
-            width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-        
-        .map-container iframe {
-            width: 100%;
-            height: 450px;
-            border: 0;
-            display: block;
-        }
-        
-        .location-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .info-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: left;
-            max-width: 350px;
-            transition: transform 0.3s ease;
-        }
-        
-        .info-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .info-card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .info-card h3 i {
-            margin-right: 10px;
-            color: #ffd600;
-        }
-        
-        .info-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        @media (max-width: 768px) {
-            .location-section h2 {
-                font-size: 2rem;
-            }
-            
-            .map-container iframe {
-                height: 350px;
-            }
-            
-            .info-card {
-                max-width: 100%;
-            }
-        }
+/* Responsive Sidebar Toggle Button */
+.filter-toggle {
+  display: none;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.filter-toggle i {
+  margin-right: 8px;
+}
 
-        .badge {
+/* Slide-in Sidebar for Small Screens */
+@media (max-width: 991px) {
+  .filter-toggle {
+    display: block;
+  }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 90vh;
+    z-index: 1100;
+    transition: var(--transition);
+    width: 75%;
+    overflow-y: auto;
+    padding-top: 2rem;
+    border-radius: 0px;
+  }
+  .sidebar.open {
+    left: 0;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+  body.sidebar-open::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.3);
+    z-index: 998;
+  }
+}
+.sidebar .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  color: var(--dark);
+  border: none;
+  cursor: pointer;
+}
+@media (min-width: 992px) {
+  .close-btn {
+    display: none !important;
+  }
+}
+
+
+.badge {
   background: #ffd700;
   color: #000;
   font-size: 0.5rem;
@@ -130,324 +506,12 @@
   right: 21px;
   display: none;
 }
-    </style>
-    <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      overflow-x: hidden;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-
-    /* Loader styles */
-    .loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    .loader h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      letter-spacing: 1px;
-      color: #1a1a1a;
-      opacity: 0;
-      text-align: center;
-    }
-
-    /* Main content */
-    .hero-section {
-      min-height: 100vh;
-      padding: 60px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: linear-gradient(to bottom, #ffffff, #f2f2f2);
-      text-align: center;
-    }
-
-    .hero-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      color: #111;
-      letter-spacing: 1px;
-    }
-
-    .hero-section p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      color: #666;
-      line-height: 1.6;
-    }
-
-.testimonial-gallery-section {
-  padding: 80px 20px;
-  background: #f9f9f9;
-  text-align: center;
-}
-
-.testimonial-gallery-title {
-  font-size: 2.4rem;
-  color: #002366;
-  font-weight: 700;
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.testimonial-gallery-title span {
-  width: 60px;
-  height: 2px;
-  background-color: #ccc;
-  margin: 0 20px;
-}
-
-.testimonial-gallery {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.testimonial-image-box {
-  flex: 1 1 300px;
-  max-width: 400px;
-  overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  background: white;
-  transition: transform 0.3s ease;
-}
-
-.testimonial-image-box:hover {
-  transform: scale(1.02);
-}
-
-.testimonial-image-box img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 16px;
-}
-
-
-/* ==== DISCOUNT POPUP STYLES ==== */
-
-.discount-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.65);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.discount-popup-content {
-  background: #ffffff;
-  width: 90%;
-  max-width: 600px;
-  padding: 50px 40px;
-  border-radius: 20px;
-  position: relative;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.5s ease;
-  text-align: center;
-}
-
-.close-popup {
-  position: absolute;
-  top: 18px;
-  right: 24px;
-  background: none;
-  border: none;
-  font-size: 30px;
-  font-weight: bold;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.close-popup:hover {
-  color: #000;
-}
-
-.popup-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.popup-title {
-  font-size: 2rem;
-  color: #002366;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.popup-subtitle {
-  font-size: 1.2rem;
-  color: #444;
-  margin-bottom: 10px;
-}
-
-.popup-input {
-  padding: 14px 16px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  outline: none;
-  width: 100%;
-}
-
-.popup-btn {
-  background: #002366;
-  color: #FFD700;
-  padding: 14px 0;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.popup-btn:hover {
-  background: #001a4d;
-}
-
-.popup-note {
-  font-size: 0.9rem;
-  color: #999;
-  margin-top: 10px;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@media (max-width: 600px) {
-  .discount-popup-content {
-    padding: 40px 25px;
-  }
-
-  .popup-title {
-    font-size: 1.6rem;
-  }
-
-  .popup-subtitle {
-    font-size: 1.05rem;
-  }
-}
-
-
-.category-slider-wrapper {
-  padding: 3rem 1rem;
-  background: #f9f9f9;
-}
-
-.category-slider-title {
-  text-align: center;
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: #212529;
-}
-
-.category-card {
-  position: relative;
-  height: 300px;
-  border-radius: 16px;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  overflow: hidden;
-}
-
-.overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 1.5rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-  color: #fff;
-}
-
-.overlay h3 {
-  font-size: 1.4rem;
-  margin: 0 0 0.5rem;
-  font-weight: 600;
-}
-
-.shop-btn {
-  background: #002366;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  display: inline-block;
-  transition: background 0.3s ease;
-}
-
-.shop-btn:hover {
-  background: #001a4d;
-}
-.swiper-pagination {
-  margin-top: 1rem;
-  text-align: center;
-  position: relative !important;
-  bottom: auto !important;
-}
-
-.swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background: #bbb;
-  opacity: 1;
-  margin: 0 6px !important;
-  border-radius: 50%;
-  transition: background 0.3s;
-}
-
-.swiper-pagination-bullet-active {
-  background: #002366;
-}
-
   </style>
-    
-    
-  </head>
-  <body>
-    
-     <header class="navbar">
+
+</head>
+<body>
+
+  <header class="navbar">
     <div class="mobile-header">
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
         <i class="fas fa-bars"></i>
@@ -481,39 +545,8 @@
     </select>
   </div>
   <input type="text" id="searchInput" placeholder="Search your favorite product..." />
-<button onclick="handleSearch()">Search</button>
+  <button onclick="searchProducts()">Search</button>
 </div>
-
-<script>
-  function handleSearch() {
-    const searchTerm = document.getElementById("searchInput").value.trim();
-    localStorage.setItem("searchTerm", searchTerm);
-    window.location.href = "Shop.html";
-  }
-</script>
-<script>
-  // Function to store the search and redirect
-  function handleSearch() {
-    const searchTerm = document.getElementById("searchInput").value.trim();
-    if (searchTerm) {
-      localStorage.setItem("searchTerm", searchTerm);
-      window.location.href = "Shop.html";
-    }
-  }
-
-  // Handle Enter key on search input
-  document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById("searchInput");
-    if (input) {
-      input.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          handleSearch();
-        }
-      });
-    }
-  });
-</script>
 
 
       <div class="icons">
@@ -585,7 +618,6 @@
   });
 </script>
 
-
 <!-- Script to update cart & wishlist -->
 <script>
   function updateCartCount() {
@@ -613,266 +645,640 @@
   updateWishlistCount();
 </script>
 
-  
+
+
   <div class="promo-slider">
-    <div class="slider-track">
-      &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;
-    </div>
-  </div>
-
-  <section class="category-slider-wrapper">
-  <h2 class="category-slider-title">Elegant Event Categories</h2>
-
-  <div class="swiper categorySwiper">
-    <div class="swiper-wrapper">
-      <!-- Slide 1 -->
-      <div class="swiper-slide category-card" style="background-image: url('images/S_Mehndi.webp');">
-        <div class="overlay">
-          <h3>Mehndi Items</h3>
-          <a href="Shop.html?category=mehndi" class="shop-btn">Shop Now</a>
+        <div class="slider-track">
+            &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;
         </div>
-      </div>
-      <!-- Repeat for other slides -->
-      <div class="swiper-slide category-card" style="background-image: url('images/S_Birthday.avif  ');">
-        <div class="overlay"><h3>Birthday</h3><a href="Shop.html?category=birthday" class="shop-btn">Shop Now</a></div>
-      </div>
-      <div class="swiper-slide category-card" style="background-image: url('images/S_DateFix.jpeg');">
-        <div class="overlay"><h3>Date Fix</h3><a href="Shop.html?category=date" class="shop-btn">Shop Now</a></div>
-      </div>
-      <div class="swiper-slide category-card" style="background-image: url('images/S_Nikkah.jpg');">
-        <div class="overlay"><h3>Nikkah</h3><a href="Shop.html?category=nikkah" class="shop-btn">Shop Now</a></div>
-      </div>
-      <div class="swiper-slide category-card" style="background-image: url('images/Hajj/ProductC.jpg');">
-        <div class="overlay"><h3>Hajj</h3><a href="Shop.html?category=hajj" class="shop-btn">Shop Now</a></div>
-      </div>
-      <div class="swiper-slide category-card" style="background-image: url('images/S_BaatPakki.webp');">
-        <div class="overlay"><h3>Baat Pakki</h3><a href="Shop.html?category=baat" class="shop-btn">Shop Now</a></div>
-      </div>
-      <div class="swiper-slide category-card" style="background-image: url('images/S_FancyEnvelop.jpg');">
-        <div class="overlay"><h3>Fancy Envelopes</h3><a href="Shop.html?category=wedding" class="shop-btn">Shop Now</a></div>
-      </div>
-      <div class="swiper-slide category-card" style="background-image: url('images/S_NikkahBB.webp');">
-        <div class="overlay"><h3>Nikkah Bid Boxes</h3><a href="Shop.html?category=nikkahbb" class="shop-btn">Shop Now</a></div>
-      </div>
     </div>
-  </div>
-  <!-- Dots -->
-  <div class="swiper-pagination"></div>
-</section>
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+    <div class="container">
+    <!-- Filter Toggle Button (Visible only on small screens) -->
+<button id="filterToggle" class="filter-toggle">
+  <i class="fas fa-filter"></i> Filter Products
+</button>
+
+<!-- Sidebar for Categories & Price Filter -->
+<aside class="sidebar" id="filterSidebar">
+  <button class="close-btn" onclick="closeSidebar()">×</button>
+  <h2>Categories</h2>
+  <ul class="category-list">
+    <li class="active" onclick="filterProducts('all')">All Products</li>
+    <li onclick="filterProducts('mehndi')">Mehndi Items</li>
+    <li onclick="filterProducts('wedding')">Fancy Envelop</li>
+    <li onclick="filterProducts('birthday')">Birthday Items</li>
+    <li onclick="filterProducts('date')">Date Fix</li>
+    <li onclick="filterProducts('hajj')">Hajj Decor</li>
+    <li onclick="filterProducts('baat')">Baat Pakki</li>
+    <li onclick="filterProducts('nikkah')">Nikkah Items</li>
+    <li onclick="filterProducts('nikkahbb')">Nikkah Bid Boxes</li>
+  </ul>
+
+  <div class="filter-section">
+    <h3>Price</h3>
+    <div class="price-range-display">
+      <span id="minPrice">Rs0</span> <span> — </span>
+      <span id="maxPrice">Rs5,000</span>
+    </div>
+    <div class="price-slider-container">
+      <input type="range" min="0" max="5000" value="5000" step="100" class="price-slider" id="priceRange">
+    </div>
+    <button class="apply-filter-btn" onclick="applyPriceFilter()">FILTER</button>
+  </div>
+</aside>
 <script>
-  const swiper = new Swiper(".categorySwiper", {
-    loop: true,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false,
-    },
-    slidesPerView: 1,
-    spaceBetween: 20,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-      },
-      992: {
-        slidesPerView: 3,
-      },
-      1200: {
-        slidesPerView: 4,
-      },
+  const toggleBtn = document.getElementById('filterToggle');
+  const sidebar = document.getElementById('filterSidebar');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    document.body.classList.toggle('sidebar-open');
+  });
+
+  // Close sidebar if clicking outside
+  window.addEventListener('click', function(e) {
+    if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+      sidebar.classList.remove('open');
+      document.body.classList.remove('sidebar-open');
+    }
+  });
+  function closeSidebar() {
+  const sidebar = document.getElementById('filterSidebar');
+  sidebar.classList.remove('open');
+  document.body.classList.remove('sidebar-open');
+}
+
+
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.getElementById('filterSidebar');
+
+    // Check if we should auto-open the sidebar
+    if (sessionStorage.getItem('openFilterOnLoad') === 'true') {
+      sidebar.classList.add('open');
+      document.body.classList.add('sidebar-open');
+      sessionStorage.removeItem('openFilterOnLoad');
     }
   });
 </script>
 
 
-   <main class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Create <span style="color: #ffd700;">Unforgettable</span> Events</h1>
-                <p>Discover premium event supplies, decorations, and planning services to make your special occasion truly memorable.</p>
-                <a href="Shop.html" class="btn">Explore Collections</a>
-            </div>
-        </section>
 
-        <!-- Featured Categories -->
-        <section id="categories">
-            <h2 class="section-title">Our Event Categories</h2>
-            <div class="categories">
-                <div class="category-card">
-                    <img src="images/Mehndi/Product1.jpg" alt="Mehndi Item Collection" class="category-img">
-                    <div class="category-info">
-                        <h3>Mehndi Item Collection</h3>
-                        <p>Celebrate Color, Culture & Charm — Discover Our Vibrant Mehndi Essentials.</p>
-                        <a href="Shop.html?category=mehndi" class="btn">Shop Now</a>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <img src="images/Fancy_Envelop/Product1.jpg" alt="Fancy Envelop Collection" class="category-img">
-                    <div class="category-info">
-                        <h3>Fancy Envelop Collection</h3>
-                        <p>Wrap Your Blessings in Elegance – Explore Our Designer Envelopes for Every Occasion.</p>
-                        <a href="Shop.html?category=wedding" class="btn">Shop Now</a>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <img src="images/Baat_Pakki/Product1.jpg" alt="Baat Pakki Collection" class="category-img">
-                    <div class="category-info">
-                        <h3>Baat Pakki Collection</h3>
-                        <p>Seal the Promise with Style – Elegant Decor & Gifts for Baat Pakki Ceremonies.</p>
-                        <a href="Shop.html?category=baat" class="btn">Shop Now</a>
-                    </div>
-            </div>
+  <script>
+    // Add To Wishlist
+    function addToWishlist(name, price, image) {
+      const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      const exists = wishlist.find(item => item.name === name);
+      if (!exists) {
+        wishlist.push({ name, price, image, date: new Date().toLocaleDateString() });
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      }
+      window.location.href = 'wishlist.html';
+    }
+  </script>
+  <script>
+    // Example "Add to Cart" function in shop.html
+function addToCart(name, price, image) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        </section>
-        <section id="categories">
-            <div class="categories">
-                <div class="category-card">
-                    <img src="images/Date_Fix/Product1.jpg" alt="Date Fix Collection" class="category-img">
-                    <div class="category-info">
-                        <h3>Date Fix Collection</h3>
-                        <p>Fix the Date, Frame the Moment – Premium Decor & Accessories for Your Big Announcement.</p>
-                        <a href="Shop.html?category=date" class="btn">Shop Now</a>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <img src="images/Hajj/ProductC.jpg" alt="Hajj" class="category-img">
-                    <div class="category-info">
-                        <h3>Hajj Collection</h3>
-                        <p>Purity, Peace & Purpose – Essentials for a Spiritual Journey.</p>
-                        <a href="Shop.html?category=hajj" class="btn">Shop Now</a>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <img src="images/Nikkah/Product5.jpg" alt="Nikkah Item Collections" class="category-img">
-                    <div class="category-info">
-                        <h3>Nikkah Item Collection</h3>
-                        <p>Sacred Beginnings, Styled Beautifully – Discover Premium Nikkah Decor & Essentials.</p>
-                        <a href="Shop.html?category=nikkah" class="btn">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+  // Check if item already exists
+  const existingItemIndex = cart.findIndex(item => item.name === name && item.image === image);
 
+  if (existingItemIndex !== -1) {
+    cart[existingItemIndex].quantity += 1;
+  } else {
+    cart.push({ name, price, image, quantity: 1 });
+  }
 
-        <!-- Services Section -->
-        <section class="services">
-            <h2 class="section-title" style="color: white;">Our Services</h2>
-            <div class="services-container">
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <h3>Event Planning</h3>
-                    <p>Full-service event planning from concept to execution by our experienced team.</p>
-                </div>
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <h3>Fast Delivery</h3>
-                    <p>Reliable delivery of all your event supplies right when you need them.</p>
-                </div>
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h3>Premium Quality</h3>
-                    <p>Only the highest quality event supplies that will impress your guests.</p>
-                </div>
-            </div>
-        </section>
+  localStorage.setItem('cart', JSON.stringify(cart));
+  window.location.href = "cart.html"; // Redirect to cart
+}
+</script>
 
-<!-- Location Section -->
-<section class="location-section">
-        <h2>Our Location</h2>
-        
-        <div class="map-container">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d226.2988939427373!2d67.06851080388994!3d24.837117369378102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33da8398ab25d%3A0xce0efaf810859e0!2sElegant%20Event%20Managers!5e0!3m2!1sen!2s!4v1750144882700!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+    <!-- Product Grid -->
+    <main class="product-grid">
+      <!-- Mehndi Items Product -->
+      <div class="product-card" data-category="mehndi">
+        <span class="product-badge">Best Seller</span>
+        <div class="product-img-container">
+          <img src="images/Mehndi/Product1.jpg" alt="Premium Mehndi Cone Set" class="product-img">
+          <div class="product-actions">
+            <button class="action-btn" title="Quick View" onclick="quickViewProduct('Mehndi Rasam Plate (18)', 950, 'images/Mehndi/Product1.jpg',)">
+  <i class="fas fa-eye"></i>
+</button>
+            <button class="action-btn" title="Add to Wishlist" onclick="addToWishlist('Mehndi Rasam Plate (18)', 'images/Mehndi/Product1.jpg', 950)">
+  <i class="far fa-heart"></i>
+</button>
+
+          </div>
         </div>
-        
-        <div class="location-info">
-            <div class="info-card">
-                <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
-                <p>Gold Mark 2 Shopping Mall 2, 2nd Floor Shop #20, Karachi, Pakistan</p>
+        <div class="product-info">
+          <span class="product-category">Mehndi Items</span>
+          <h3 class="product-title">Mehndi Rasam Plate (18")</h3>
+          <div class="rating">
+            <div class="rating-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
             </div>
-            
-            <div class="info-card">
-                <h3><i class="fas fa-clock"></i> Opening Hours</h3>
-                <p>Open 24 Hours<br>Open NOW</p>
-            </div>
-            
-            <div class="info-card">
-                <h3><i class="fas fa-phone-alt"></i> Contact</h3>
-                <p>Phone: +92 333 2243753<br>Email: amadtip@gmail.com</p>
-            </div>
+            <span class="rating-count">(36)</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">PKR 950.00</span>
+          </div>
+          <button class="add-to-cart" onclick="addToCart('Mehndi Rasam Plate (18)', 950, 'images/Mehndi/Product1.jpg')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
         </div>
-    </section>
+      </div>
+      
 
-    <section class="testimonial-gallery-section">
-  <h2 class="testimonial-gallery-title"><span></span>Customer Testimonials<span></span></h2>
+      <!-- Fancy Envelop Product -->
+      <div class="product-card" data-category="wedding">
+        <div class="product-img-container">
+          <img src="images/Fancy_Envelop/Product1.jpg" alt="Luxury Wedding Envelop" class="product-img">
+          <div class="product-actions">
+            <button class="action-btn" title="Quick View" onclick="quickViewProduct('Nikkah Mubarak Envelop (Wallpaper)', 150, 'images/Fancy_Envelop/Product1.jpg')">
+  <i class="fas fa-eye"></i>
+</button>
+            <button class="action-btn" title="Add to Wishlist"
+  onclick="addToWishlist('Nikkah Mubarak Envelop (Wallpaper)', 'images/Fancy_Envelop/Product1.jpg', 150)">
+  <i class="far fa-heart"></i>
+</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Fancy Envelop</span>
+          <h3 class="product-title">Nikkah Mubarak Envelop (Wallpaper)</h3>
+          <div class="rating">
+            <div class="rating-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <span class="rating-count">(28)</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">PKR 150.00</span>
+          </div>
+          <button class="add-to-cart" onclick="addToCart('Nikkah Mubarak Envelop (Wallpaper)', 150, 'images/Fancy_Envelop/Product1.jpg')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+      
 
-  <div class="testimonial-gallery">
-    <div class="testimonial-image-box">
-      <img src="images/Customer_Rvs/R1.jpg" alt="Customer 1">
-    </div>
-    <div class="testimonial-image-box">
-      <img src="images/Customer_Rvs/R2.jpg" alt="Customer 2">
-    </div>
-    <div class="testimonial-image-box">
-      <img src="images/Customer_Rvs/R3.jpg" alt="Customer 3">
-    </div>
+      <!-- Birthday Items Product -->
+      <div class="product-card" data-category="birthday">
+        <span class="product-badge">New</span>
+        <div class="product-img-container">
+          <img src="images/Birthday/Product1.jpg" alt="Birthday Foil Balloon" class="product-img">
+          <div class="product-actions">
+            <button class="action-btn" title="Quick View" onclick="quickViewProduct('Foil Balloon (Birthday)', 350, 'images/Birthday/Product1.jpg')">
+  <i class="fas fa-eye"></i>
+</button>
+            <button class="action-btn" title="Add to Wishlist"
+  onclick="addToWishlist('Foil Balloon (Birthday)', 'images/Birthday/Product1.jpg', 350)">
+  <i class="far fa-heart"></i>
+</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Birthday Items</span>
+          <h3 class="product-title">Foil Balloon (Birthday)</h3>
+          <div class="rating">
+            <div class="rating-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <span class="rating-count">(45)</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">PKR 350.00</span>
+          </div>
+          <button class="add-to-cart" onclick="addToCart('Foil Balloon (Birthday)', 350, 'images/Birthday/Product1.jpg')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+      
+
+      <!-- Date Fix Product -->
+      <div class="product-card" data-category="date">
+        <div class="product-img-container">
+          <img src="images/Date_Fix/Product1.jpg" alt="Date Fix Gift Box" class="product-img">
+          <div class="product-actions">
+            <button class="action-btn" title="Quick View" onclick="quickViewProduct('Date Fix Foil Balloon', 350, 'images/Date_Fix/Product1.jpg')">
+  <i class="fas fa-eye"></i>
+</button>
+            <button class="action-btn" title="Add to Wishlist"
+  onclick="addToWishlist('Date Fix Foil Balloon', 'images/Date_Fix/Product1.jpg', 350)">
+  <i class="far fa-heart"></i>
+</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Date Fix</span>
+          <h3 class="product-title">Date Fix Foil Balloon</h3>
+          <div class="rating">
+            <div class="rating-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="rating-count">(19)</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">PKR 350.00</span>
+          </div>
+          <button class="add-to-cart" onclick="addToCart('Date Fix Foil Balloon', 350, 'images/Date_Fix/Product1.jpg')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+      
+
+      <!-- Baat Pakki Product -->
+      <div class="product-card" data-category="baat">
+        <span class="product-badge">Popular</span>
+        <div class="product-img-container">
+          <img src="images/Baat_Pakki/Product1.jpg" alt="Baat Pakki Gift Set" class="product-img">
+          <div class="product-actions">
+            <button class="action-btn" title="Quick View" onclick="quickViewProduct('Baat Pakki Mithai Topers', 100, 'images/Baat_Pakki/Product1.jpg')">
+  <i class="fas fa-eye"></i>
+</button>
+            <button class="action-btn" title="Add to Wishlist"
+  onclick="addToWishlist('Baat Pakki Mithai Topers', 'images/Baat_Pakki/Product1.jpg', 100)">
+  <i class="far fa-heart"></i>
+</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Baat Pakki</span>
+          <h3 class="product-title">Baat Pakki Mithai Topers</h3>
+          <div class="rating">
+            <div class="rating-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <span class="rating-count">(22)</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">PKR 100.00</span>
+          </div>
+          <button class="add-to-cart" onclick="addToCart('Baat Pakki Mithai Topers', 100, 'images/Baat_Pakki/Product1.jpg')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+      
+
+      <!-- Nikkah Item Product -->
+      <div class="product-card" data-category="nikkah">
+        <div class="product-img-container">
+          <img src="images/Nikkah/Product5.jpg" alt="Premium Suit Box" class="product-img">
+          <div class="product-actions">
+            <button class="action-btn" title="Quick View" onclick="quickViewProduct('Nikkah Thumb Frame (Square)', 1500, 'images/Nikkah/Product5.jpg')">
+  <i class="fas fa-eye"></i>
+</button>
+            <button class="action-btn" title="Add to Wishlist"
+  onclick="addToWishlist('Nikkah Thumb Frame (Square)', 'images/Nikkah/Product5.jpg', 1500)">
+  <i class="far fa-heart"></i>
+</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Nikkah Item</span>
+          <h3 class="product-title">Nikkah Thumb Frame (Square)</h3>
+          <div class="rating">
+            <div class="rating-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <span class="rating-count">(31)</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">PKR 1500,00</span>
+          </div>
+          <button class="add-to-cart" onclick="addToCart('Nikkah Thumb Frame (Square)', 1500, 'images/Nikkah/Product5.jpg')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+      
+
+      <!-- Hajj Mubarak Decor Set -->
+      <div class="product-card" data-category="hajj">
+        <span class="product-badge">Popular</span>
+        <div class="product-img-container">
+          <img src="images/Hajj/Product1.jpg" alt="Hajj Mubarak Decor Set" class="product-img">
+          <div class="product-actions">
+            <button class="action-btn" title="Quick View" onclick="quickViewProduct('Hajj Mubarak Decor Set', 1250, 'images/Hajj/Product1.jpg')">
+  <i class="fas fa-eye"></i>
+</button>
+            <button class="action-btn" title="Add to Wishlist"
+  onclick="addToWishlist('Hajj Mubarak Decor Set', 'images/Hajj/Product1.jpg', 1250)">
+  <i class="far fa-heart"></i>
+</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Hajj Decor</span>
+          <h3 class="product-title">Hajj Mubarak Decor Set</h3>
+          <div class="rating">
+            <div class="rating-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="rating-count">(24)</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">PKR 1,250</span>
+          </div>
+          <button class="add-to-cart" onclick="addToCart('Hajj Mubarak Decor Set', 1250, 'images/Hajj/Product1.jpg')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <!-- Nikkah Bid Boxs -->
+      <div class="product-card" data-category="nikkahbb">
+        <span class="product-badge">Popular</span>
+        <div class="product-img-container">
+          <img src="images/Nikkah Bid Boxes/Product1.jpg" alt="Triangle Style Nikkah Bid" class="product-img">
+          <div class="product-actions">
+            <button class="action-btn" title="Quick View" onclick="quickViewProduct('Triangle Style Nikkah Bid', 15, 'images/Nikkah Bid Boxes/Product1.jpg')">
+  <i class="fas fa-eye"></i>
+</button>
+            <button class="action-btn" title="Add to Wishlist"
+  onclick="addToWishlist('Triangle Style Nikkah Bid', 'images/Nikkah Bid Boxes/Product1.jpg', 15)">
+  <i class="far fa-heart"></i>
+</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Nikkah Bid Boxes</span>
+          <h3 class="product-title">Triangle Style Nikkah Bid</h3>
+          <div class="rating">
+            <div class="rating-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="rating-count">(24)</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">PKR 1,250</span>
+          </div>
+          <button class="add-to-cart" onclick="addToCart('Triangle Style Nikkah Bid', 15, 'images/Nikkah Bid Boxes/Product1.jpg')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+
+      
+    </main>
+    <p id="noResultsMsg" style="display: none; text-align: center; font-weight: bold; color: red; padding: 20px;">
+  No products were found matching your selection.
+</p>
   </div>
-</section>
+<script>
+  function searchProducts() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const cards = document.querySelectorAll(".product-card");
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const title = card.querySelector(".product-title").textContent.toLowerCase();
+    const matches = title.includes(input);
+    card.style.display = matches ? "block" : "none";
+    if (matches) visibleCount++;
+  });
+
+  // Show or hide the no-results message
+  const msg = document.getElementById("noResultsMsg");
+  msg.style.display = visibleCount === 0 ? "block" : "none";
+}
+
+</script>
+<script>
+  document.getElementById("searchInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      searchProducts();
+    }
+  });
+</script>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const storedTerm = localStorage.getItem("searchTerm");
+    if (storedTerm) {
+      document.getElementById("searchInput").value = storedTerm;
+      searchProducts(); // Reuse your search logic
+      localStorage.removeItem("searchTerm"); // clear after search
+    }
+  });
+</script>
 
 
-    <section class="newsletter-section">
+
+
+  <!-- Your existing footer code here -->
+
+  <script>
+    // Function to extract URL parameters
+    function getUrlParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // On page load, check the URL and filter products
+    document.addEventListener("DOMContentLoaded", function() {
+        const category = getUrlParam("category") || "all"; // Default: show all
+        filterProducts(category); // Apply the filter
+    });
+
+    // Your existing filter function
+    function filterProducts(category) {
+        const products = document.querySelectorAll(".product-card");
+        products.forEach(product => {
+            if (category === "all" || product.dataset.category === category) {
+                product.style.display = "block"; // Show matching products
+            } else {
+                product.style.display = "none"; // Hide others
+            }
+        });
+        
+        // Highlight the active category in the sidebar
+        const categoryLinks = document.querySelectorAll(".category-list li");
+        categoryLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.textContent.toLowerCase().includes(category)) {
+                link.classList.add("active");
+            }
+        });
+    }
+</script>
+
+
+
+<!-- Price Filter -->
+<script>
+  // Price Filter Functionality
+const priceSlider = document.getElementById('priceRange');
+const maxPriceDisplay = document.getElementById('maxPrice');
+
+// Update price display as slider moves
+priceSlider.addEventListener('input', function() {
+  maxPriceDisplay.textContent = `Rs${this.value}`;
+});
+
+// Function to apply price filter
+function applyPriceFilter() {
+  const maxPrice = parseInt(priceSlider.value);
+  const products = document.querySelectorAll('.product-card');
+  
+  products.forEach(product => {
+    // Get the product price (remove "Rs" or "PKR" and commas, then parse to number)
+    const priceText = product.querySelector('.current-price').textContent;
+    const price = parseInt(priceText.replace(/[^\d]/g, ''));
+    
+    if (price <= maxPrice) {
+      product.style.display = 'block';
+    } else {
+      product.style.display = 'none';
+    }
+  });
+  
+  // Update the active filter display
+  document.querySelector('.product-grid-title').textContent = 
+    `Products under Rs${maxPrice}`;
+}
+
+// Make sure price filter works with category filter
+function filterProducts(category) {
+  // Update active category in sidebar
+  const categoryItems = document.querySelectorAll('.category-list li');
+  categoryItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('onclick').includes(`'${category}'`)) {
+      item.classList.add('active');
+    }
+  });
+  
+  // Reset price slider to show all prices when changing category
+  priceSlider.value = 5000;
+  maxPriceDisplay.textContent = 'Rs5,000';
+  
+  // Filter products by category
+  const products = document.querySelectorAll('.product-card');
+  products.forEach(product => {
+    if (category === 'all' || product.dataset.category === category) {
+      product.style.display = 'block';
+    } else {
+      product.style.display = 'none';
+    }
+  });
+  
+  // Update grid title
+  const activeCategory = document.querySelector('.category-list li.active');
+const titleElement = document.querySelector('.product-grid-title');
+
+if (titleElement && activeCategory) {
+  titleElement.textContent = category === 'all' ? 'All Products' : activeCategory.textContent;
+}
+closeSidebar();
+}
+</script>
+
+<!-- Add To Wishlist -->
+<script>
+  function addToWishlist(name, image, price) {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+    const exists = wishlist.find(item => item.name === name);
+    if (!exists) {
+      wishlist.push({
+        name: name,
+        image: image,
+        price: price,
+        dateAdded: new Date().toLocaleDateString()
+      });
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
+    window.location.href = 'wishlist.html';
+  }
+</script>
+
+<!-- Quick view -->
+<script>
+  function quickViewProduct(name, price, image) {
+    const product = { name, price, image };
+    localStorage.setItem("quickViewProduct", JSON.stringify(product));
+    window.location.href = "product-details.html";
+  }
+</script>
+
+
+
+
+  <section class="newsletter-section">
         <h2 class="newsletter-header">Be The First To Get Discounts</h2>
         
         <div class="newsletter-container">
-          <p class="newsletter-text">
-            Get E-Mail Updates About Our Latest Shop And Special Offers.
-          </p>
-          
-          <form class="newsletter-form">
+            <p class="newsletter-text">
+                Get E-Mail Updates About Our Latest Shop And Special Offers.
+            </p>
+            
+            <form class="newsletter-form">
                 <input type="email" class="email-input" placeholder="Email" required>
                 <button type="submit" class="subscribe-btn">Subscribe</button>
             </form>
-          </div>
-        </section>
-        
-        <footer class="footer">
-          <div class="footer-container">
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
             <!-- First Column: Brand Info -->
             <div class="footer-column">
-              <div class="brand-name">Elegant Events</div>
+                <div class="brand-name">Elegant Events</div>
                 <p class="about-text">
                     At Elegant Events, we specialize in making your celebrations unforgettable. From birthdays to weddings, festivals, and beyond, our diverse range of decoration items brings joy and elegance to every occasion.
-                  </p>
-                  
-                  <div class="social-bar">
+                </p>
+                <div class="social-bar">
                     <a href="https://www.facebook.com/ELEGANT-EVENT-MANAGERS-100063915645993/" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/explore/locations/223978067695106/elegant-event-managers/" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
                     <!-- <a href="#" class="social-icon" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
                     <a href="#" class="social-icon" target="_blank"><i class="fab fa-tiktok"></i></a> -->
                     <a href="https://www.youtube.com/@amadtip" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
                   </div>
-                </div>
-      
+            </div>
+            
             <!-- Second Column: Quick Links -->
             <div class="footer-column">
-              <h3 class="footer-title">Quick Links</h3>
-              <ul class="footer-links">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
                     <li><a href="AboutUS.html">About Us</a></li>
                     <li><a href="ContactUs.html">Contact Us</a></li>
                     <li><a href="WholeSale.html">Whole Sale</a></li>
@@ -880,19 +1286,19 @@
                     <li><a href="order-tracking.html">Order Tracking</a></li>
                     <li><a href="privacy-policy.html">Privacy Policy</a></li>
                     <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-                  </ul>
-                </div>
+                </ul>
+            </div>
             
-                <!-- Third Column: Get In Touch -->
-                <div class="footer-column">
-                  <h3 class="footer-title">Get In Touch</h3>
-                  <div class="contact-info">
+            <!-- Third Column: Get In Touch -->
+            <div class="footer-column">
+                <h3 class="footer-title">Get In Touch</h3>
+                <div class="contact-info">
                     <p><strong>Email:</strong> amadtip@gmail.com</p>
                     <p><strong>Phone:</strong> 0333 2243753</p>
-                  </div>
                 </div>
-              </div>
-            </footer>
+            </div>
+        </div>
+    </footer>
 
 <!-- WhatsApp Floating Chat -->
 <div class="whatsapp-chat">
@@ -962,82 +1368,5 @@
   }
 </style>
 
- <!-- Loader Screen -->
-  <div class="loader">
-    <h1 id="loader-logo">Welcome to Elegant Events</h1>
-  </div>
-
-  <!-- Page Content -->
-  <div class="hero-section">
-    <h2 class="hero-title">Welcome to Elegant Events</h2>
-    <p class="hero-text">
-      Discover the art of celebration with our premium event decorations, curated themes, and unforgettable experiences.
-    </p>
-  </div>
-
-  <!-- GSAP CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-
-   <!-- Animation Script -->
-  <script>
-    window.addEventListener("load", () => {
-      const tl = gsap.timeline();
-
-      tl.to("#loader-logo", {
-        opacity: 1,
-        y: -10,
-        duration: 1.2,
-        ease: "power2.out"
-      })
-      .to(".loader", {
-        y: "-100%",
-        duration: 1.2,
-        ease: "power2.inOut"
-      }, "+=0.5")
-      .from(".hero-title", {
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        ease: "power4.out"
-      }, "-=0.3")
-      .from(".hero-text", {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out"
-      }, "-=0.6");
-    });
-  </script>
-
-<!-- Discount Pop-up Modal -->
-<div class="discount-popup" id="discountPopup">
-  <div class="discount-popup-content">
-    <button class="close-popup" onclick="closeDiscountPopup()">&times;</button>
-
-    <div class="popup-inner">
-      <h2 class="popup-title">🎉 Exclusive Offer Just for You!</h2>
-      <p class="popup-subtitle">Subscribe now and get <strong>10% OFF</strong> your first order!</p>
-      
-      <input type="email" placeholder="Enter your email address" class="popup-input" required>
-      <button class="popup-btn">Get My Discount</button>
-
-      <p class="popup-note">Limited time only. Don't miss out!</p>
-    </div>
-  </div>
-</div>
-<script>
-  window.addEventListener('load', function () {
-    setTimeout(function () {
-      document.getElementById('discountPopup').style.display = 'flex';
-    }, 9000); // show after 4 seconds
-  });
-
-  function closeDiscountPopup() {
-    document.getElementById('discountPopup').style.display = 'none';
-  }
-</script>
-
 </body>
 </html>
- 
