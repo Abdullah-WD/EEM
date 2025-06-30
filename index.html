@@ -9,9 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Optionally include font awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
      <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 
     <style>
         * {
@@ -191,6 +194,253 @@
       color: #666;
       line-height: 1.6;
     }
+
+.testimonial-gallery-section {
+  padding: 80px 20px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.testimonial-gallery-title {
+  font-size: 2.4rem;
+  color: #002366;
+  font-weight: 700;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonial-gallery-title span {
+  width: 60px;
+  height: 2px;
+  background-color: #ccc;
+  margin: 0 20px;
+}
+
+.testimonial-gallery {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.testimonial-image-box {
+  flex: 1 1 300px;
+  max-width: 400px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-image-box:hover {
+  transform: scale(1.02);
+}
+
+.testimonial-image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+
+/* ==== DISCOUNT POPUP STYLES ==== */
+
+.discount-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.discount-popup-content {
+  background: #ffffff;
+  width: 90%;
+  max-width: 600px;
+  padding: 50px 40px;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
+  text-align: center;
+}
+
+.close-popup {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-popup:hover {
+  color: #000;
+}
+
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.popup-title {
+  font-size: 2rem;
+  color: #002366;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.popup-subtitle {
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.popup-input {
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+}
+
+.popup-btn {
+  background: #002366;
+  color: #FFD700;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.popup-btn:hover {
+  background: #001a4d;
+}
+
+.popup-note {
+  font-size: 0.9rem;
+  color: #999;
+  margin-top: 10px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .discount-popup-content {
+    padding: 40px 25px;
+  }
+
+  .popup-title {
+    font-size: 1.6rem;
+  }
+
+  .popup-subtitle {
+    font-size: 1.05rem;
+  }
+}
+
+
+.category-slider-wrapper {
+  padding: 3rem 1rem;
+  background: #f9f9f9;
+}
+
+.category-slider-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #212529;
+}
+
+.category-card {
+  position: relative;
+  height: 300px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  color: #fff;
+}
+
+.overlay h3 {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.shop-btn {
+  background: #002366;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+.shop-btn:hover {
+  background: #001a4d;
+}
+.swiper-pagination {
+  margin-top: 1rem;
+  text-align: center;
+  position: relative !important;
+  bottom: auto !important;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #bbb;
+  opacity: 1;
+  margin: 0 6px !important;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background: #002366;
+}
+
   </style>
     
     
@@ -369,7 +619,77 @@
       &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;
     </div>
   </div>
-  
+
+  <section class="category-slider-wrapper">
+  <h2 class="category-slider-title">Elegant Event Categories</h2>
+
+  <div class="swiper categorySwiper">
+    <div class="swiper-wrapper">
+      <!-- Slide 1 -->
+      <div class="swiper-slide category-card" style="background-image: url('images/S_Mehndi.webp');">
+        <div class="overlay">
+          <h3>Mehndi Items</h3>
+          <a href="Shop.html?category=mehndi" class="shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <!-- Repeat for other slides -->
+      <div class="swiper-slide category-card" style="background-image: url('images/S_Birthday.avif  ');">
+        <div class="overlay"><h3>Birthday</h3><a href="Shop.html?category=birthday" class="shop-btn">Shop Now</a></div>
+      </div>
+      <div class="swiper-slide category-card" style="background-image: url('images/S_DateFix.jpeg');">
+        <div class="overlay"><h3>Date Fix</h3><a href="Shop.html?category=date" class="shop-btn">Shop Now</a></div>
+      </div>
+      <div class="swiper-slide category-card" style="background-image: url('images/S_Nikkah.jpg');">
+        <div class="overlay"><h3>Nikkah</h3><a href="Shop.html?category=nikkah" class="shop-btn">Shop Now</a></div>
+      </div>
+      <div class="swiper-slide category-card" style="background-image: url('images/Hajj/ProductC.jpg');">
+        <div class="overlay"><h3>Hajj</h3><a href="Shop.html?category=hajj" class="shop-btn">Shop Now</a></div>
+      </div>
+      <div class="swiper-slide category-card" style="background-image: url('images/S_BaatPakki.webp');">
+        <div class="overlay"><h3>Baat Pakki</h3><a href="Shop.html?category=baat" class="shop-btn">Shop Now</a></div>
+      </div>
+      <div class="swiper-slide category-card" style="background-image: url('images/S_FancyEnvelop.jpg');">
+        <div class="overlay"><h3>Fancy Envelopes</h3><a href="Shop.html?category=wedding" class="shop-btn">Shop Now</a></div>
+      </div>
+      <div class="swiper-slide category-card" style="background-image: url('images/S_NikkahBB.webp');">
+        <div class="overlay"><h3>Nikkah Bid Boxes</h3><a href="Shop.html?category=nikkahbb" class="shop-btn">Shop Now</a></div>
+      </div>
+    </div>
+  </div>
+  <!-- Dots -->
+  <div class="swiper-pagination"></div>
+</section>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper(".categorySwiper", {
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    slidesPerView: 1,
+    spaceBetween: 20,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+      },
+      992: {
+        slidesPerView: 3,
+      },
+      1200: {
+        slidesPerView: 4,
+      },
+    }
+  });
+</script>
+
+
    <main class="container">
         <!-- Hero Section -->
         <section class="hero">
@@ -499,7 +819,22 @@
         </div>
     </section>
 
-    
+    <section class="testimonial-gallery-section">
+  <h2 class="testimonial-gallery-title"><span></span>Customer Testimonials<span></span></h2>
+
+  <div class="testimonial-gallery">
+    <div class="testimonial-image-box">
+      <img src="images/Customer_Rvs/R1.jpg" alt="Customer 1">
+    </div>
+    <div class="testimonial-image-box">
+      <img src="images/Customer_Rvs/R2.jpg" alt="Customer 2">
+    </div>
+    <div class="testimonial-image-box">
+      <img src="images/Customer_Rvs/R3.jpg" alt="Customer 3">
+    </div>
+  </div>
+</section>
+
 
     <section class="newsletter-section">
         <h2 class="newsletter-header">Be The First To Get Discounts</h2>
@@ -674,6 +1009,34 @@
       }, "-=0.6");
     });
   </script>
+
+<!-- Discount Pop-up Modal -->
+<div class="discount-popup" id="discountPopup">
+  <div class="discount-popup-content">
+    <button class="close-popup" onclick="closeDiscountPopup()">&times;</button>
+
+    <div class="popup-inner">
+      <h2 class="popup-title">🎉 Exclusive Offer Just for You!</h2>
+      <p class="popup-subtitle">Subscribe now and get <strong>10% OFF</strong> your first order!</p>
+      
+      <input type="email" placeholder="Enter your email address" class="popup-input" required>
+      <button class="popup-btn">Get My Discount</button>
+
+      <p class="popup-note">Limited time only. Don't miss out!</p>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      document.getElementById('discountPopup').style.display = 'flex';
+    }, 9000); // show after 4 seconds
+  });
+
+  function closeDiscountPopup() {
+    document.getElementById('discountPopup').style.display = 'none';
+  }
+</script>
 
 </body>
 </html>
