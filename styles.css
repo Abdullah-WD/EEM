@@ -411,6 +411,7 @@ body {
 
         /* Base Styles */
         .newsletter-section {
+          background-image: url('images/newsletter.avif');
             background-color: #f5f5f5;
             padding: 40px 20px;
             font-family: 'Arial', sans-serif;
@@ -422,7 +423,7 @@ body {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 30px;
-            color: #333;
+            color: #000;
             letter-spacing: 1px;
             text-align: center;
         }
@@ -436,7 +437,7 @@ body {
         
         .newsletter-text {
             flex: 1;
-            color: #666;
+            color: #fff;
             font-size: 16px;
             line-height: 1.5;
             text-align: left;
@@ -746,7 +747,6 @@ body {
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -863,7 +863,6 @@ body {
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -931,7 +930,7 @@ body {
         
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/cta_s.avif');
             background-size: cover;
             background-position: center;
             color: white;
@@ -981,7 +980,6 @@ body {
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             height: 500px;
