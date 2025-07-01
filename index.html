@@ -14,6 +14,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
   <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<!-- AOS CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 
 
     <style>
@@ -260,11 +263,13 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .discount-popup-content {
   background: #ffffff;
-  width: 90%;
+  width: 100%;
   max-width: 600px;
   padding: 50px 40px;
   border-radius: 20px;
@@ -272,6 +277,7 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.5s ease;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .close-popup {
@@ -317,6 +323,7 @@
   border-radius: 10px;
   outline: none;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .popup-btn {
@@ -329,6 +336,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.3s;
+  width: 100%;
 }
 
 .popup-btn:hover {
@@ -352,9 +360,11 @@
   }
 }
 
+/* ✅ Responsive adjustments for smaller screens */
 @media (max-width: 600px) {
   .discount-popup-content {
-    padding: 40px 25px;
+    padding: 35px 20px;
+    border-radius: 16px;
   }
 
   .popup-title {
@@ -362,9 +372,20 @@
   }
 
   .popup-subtitle {
-    font-size: 1.05rem;
+    font-size: 1rem;
+  }
+
+  .popup-btn {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+
+  .popup-input {
+    padding: 12px 14px;
+    font-size: 0.95rem;
   }
 }
+
 
 
 .category-slider-wrapper {
@@ -696,7 +717,7 @@
 
    <main class="container">
         <!-- Hero Section -->
-        <section class="hero">
+        <section class="hero" data-aos="flip-up" data-aos-delay="200">
             <div class="hero-content">
                 <h1>Create <span style="color: #ffd700;">Unforgettable</span> Events</h1>
                 <p>Discover premium event supplies, decorations, and planning services to make your special occasion truly memorable.</p>
@@ -705,7 +726,7 @@
         </section>
 
         <!-- Featured Categories -->
-        <section id="categories">
+        <section id="categories" data-aos="fade-right" data-aos-delay="200">
             <h2 class="section-title">Our Event Categories</h2>
             <div class="categories">
                 <div class="category-card">
@@ -734,7 +755,7 @@
             </div>
 
         </section>
-        <section id="categories">
+        <section id="categories" data-aos="fade-left" data-aos-delay="200">
             <div class="categories">
                 <div class="category-card">
                     <img src="images/Date_Fix/Product1.jpg" alt="Date Fix Collection" class="category-img">
@@ -765,7 +786,7 @@
 
 
         <!-- Services Section -->
-        <section class="services">
+        <section class="services" data-aos="zoom-in" data-aos-delay="200">
             <h2 class="section-title" style="color: white;">Our Services</h2>
             <div class="services-container">
                 <div class="service-item">
@@ -793,7 +814,7 @@
         </section>
 
 <!-- Location Section -->
-<section class="location-section">
+<section class="location-section" data-aos="flip-up" data-aos-delay="200">
         <h2>Our Location</h2>
         
         <div class="map-container">
@@ -823,7 +844,7 @@
         </div>
     </section>
 
-    <section class="testimonial-gallery-section">
+    <section class="testimonial-gallery-section" data-aos="zoom-out" data-aos-delay="200">
   <h2 class="testimonial-gallery-title"><span></span>Customer Testimonials<span></span></h2>
 
   <div class="testimonial-gallery">
@@ -840,7 +861,7 @@
 </section>
 
 
-    <section class="newsletter-section">
+    <section class="newsletter-section" data-aos="fade-right" data-aos-delay="200">
         <h2 class="newsletter-header">Be The First To Get Discounts</h2>
         
         <div class="newsletter-container">
@@ -855,7 +876,7 @@
           </div>
         </section>
         
-        <footer class="footer">
+        <footer class="footer" data-aos="fade-left" data-aos-delay="200">
           <div class="footer-container">
             <!-- First Column: Brand Info -->
             <div class="footer-column">
@@ -1030,16 +1051,26 @@
     </div>
   </div>
 </div>
+
 <script>
   window.addEventListener('load', function () {
     setTimeout(function () {
       document.getElementById('discountPopup').style.display = 'flex';
-    }, 9000); // show after 4 seconds
+    }, 10000); // show after 10 seconds
   });
 
   function closeDiscountPopup() {
     document.getElementById('discountPopup').style.display = 'none';
   }
+</script>
+
+<!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true
+  });
 </script>
 
 </body>
