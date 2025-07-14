@@ -100,7 +100,7 @@
         
         .info-card h3 i {
             margin-right: 10px;
-            color: #ffd600;
+            color: #f2ca2c;
         }
         
         .info-card p {
@@ -123,7 +123,7 @@
         }
 
         .badge {
-  background: #ffd700;
+  background: #f2ca2c;
   color: #000;
   font-size: 0.5rem;
   border-radius: 50%;
@@ -142,9 +142,9 @@
     }
 
     body {
+      background-color: #fefaee;
       font-family: 'Open Sans', sans-serif;
       overflow-x: hidden;
-      background-color: #f9f9f9;
       color: #333;
     }
 
@@ -206,7 +206,7 @@
 
 .testimonial-gallery-title {
   font-size: 2.4rem;
-  color: #002366;
+  color: #2c6eee;
   font-weight: 700;
   margin-bottom: 50px;
   display: flex;
@@ -249,145 +249,7 @@
   border-radius: 16px;
 }
 
-
-/* ==== DISCOUNT POPUP STYLES ==== */
-
-.discount-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.65);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.discount-popup-content {
-  background: #ffffff;
-  width: 100%;
-  max-width: 600px;
-  padding: 50px 40px;
-  border-radius: 20px;
-  position: relative;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.5s ease;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.close-popup {
-  position: absolute;
-  top: 18px;
-  right: 24px;
-  background: none;
-  border: none;
-  font-size: 30px;
-  font-weight: bold;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.close-popup:hover {
-  color: #000;
-}
-
-.popup-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.popup-title {
-  font-size: 2rem;
-  color: #002366;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.popup-subtitle {
-  font-size: 1.2rem;
-  color: #444;
-  margin-bottom: 10px;
-}
-
-.popup-input {
-  padding: 14px 16px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  outline: none;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.popup-btn {
-  background: #002366;
-  color: #FFD700;
-  padding: 14px 0;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s;
-  width: 100%;
-}
-
-.popup-btn:hover {
-  background: #001a4d;
-}
-
-.popup-note {
-  font-size: 0.9rem;
-  color: #999;
-  margin-top: 10px;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* ✅ Responsive adjustments for smaller screens */
-@media (max-width: 600px) {
-  .discount-popup-content {
-    padding: 35px 20px;
-    border-radius: 16px;
-  }
-
-  .popup-title {
-    font-size: 1.6rem;
-  }
-
-  .popup-subtitle {
-    font-size: 1rem;
-  }
-
-  .popup-btn {
-    font-size: 1rem;
-    padding: 12px 0;
-  }
-
-  .popup-input {
-    padding: 12px 14px;
-    font-size: 0.95rem;
-  }
-}
-
-
-
+/* Slider */
 .category-slider-wrapper {
   padding: 3rem 1rem;
   background: #f9f9f9;
@@ -427,7 +289,7 @@
 }
 
 .shop-btn {
-  background: #002366;
+  background: #2c6eee;
   color: white;
   padding: 8px 14px;
   border-radius: 6px;
@@ -459,7 +321,7 @@
 }
 
 .swiper-pagination-bullet-active {
-  background: #002366;
+  background: #2c6eee;
 }
 
 
@@ -554,14 +416,14 @@
         <div class="icon-item" style="position: relative;">
           <a href="wishlist.html" style="color: white; text-decoration: none;">
             <i class="fa-regular fa-heart"></i>
-            <span id="wishlist-count" style="position: absolute; top: -11px; right: -11px; background: #ffd700; color: #000; font-size: 9px; padding: 2px 6px; border-radius: 50%;">0</span>
+            <span id="wishlist-count" style="position: absolute; top: -11px; right: -11px; background: #f2ca2c; color: #000; font-size: 9px; padding: 2px 6px; border-radius: 50%;">0</span>
           </a>
         </div>
 
         <div class="icon-item" style="position: relative;">
           <a href="cart.html" style="color: white; text-decoration: none;">
             <i class="fa-solid fa-cart-shopping"></i>
-            <span id="cart-count" style="position: absolute; top: -11px; right: -11px; background: #ffd700; color: #000; font-size: 9px; padding: 2px 6px; border-radius: 50%;">0</span>
+            <span id="cart-count" style="position: absolute; top: -11px; right: -11px; background: #f2ca2c; color: #000; font-size: 9px; padding: 2px 6px; border-radius: 50%;">0</span>
           </a>
         </div>
       </div>
@@ -639,13 +501,8 @@
 </script>
 
   
-  <div class="promo-slider">
-    <div class="slider-track">
-      &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;|® DEVELOPED BY ABDULLAH ZAFAR &nbsp;&nbsp;
-    </div>
-  </div>
 
-  <section class="category-slider-wrapper">
+  <section class="category-slider-wrapper" style="background-color: #fefaee;">
   <h2 class="category-slider-title">Elegant Event Categories</h2>
 
   <div class="swiper categorySwiper">
@@ -719,7 +576,7 @@
         <!-- Hero Section -->
         <section class="hero" data-aos="flip-up" data-aos-delay="200">
             <div class="hero-content">
-                <h1>Create <span style="color: #ffd700;">Unforgettable</span> Events</h1>
+                <h1>Create <span style="color: #f2ca2c;">Unforgettable</span> Events</h1>
                 <p>Discover premium event supplies, decorations, and planning services to make your special occasion truly memorable.</p>
                 <a href="Shop.html" class="btn">Explore Collections</a>
             </div>
@@ -730,60 +587,27 @@
             <h2 class="section-title">Our Event Categories</h2>
             <div class="categories">
                 <div class="category-card">
-                    <img src="images/Mehndi/Product1.jpg" alt="Mehndi Item Collection" class="category-img">
+                    <img src="images/Section/pic1.jpg" alt="Mehndi Item Collection" class="category-img">
                     <div class="category-info">
-                        <h3>Mehndi Item Collection</h3>
-                        <p>Celebrate Color, Culture & Charm — Discover Our Vibrant Mehndi Essentials.</p>
-                        <a href="Shop.html?category=mehndi" class="btn">Shop Now</a>
+                        <h3>Wedding Items</h3>
+                        
                     </div>
                 </div>
                 <div class="category-card">
-                    <img src="images/Fancy_Envelop/Product1.jpg" alt="Fancy Envelop Collection" class="category-img">
+                    <img src="images/Section/pic2.jpg" alt="Fancy Envelop Collection" class="category-img">
                     <div class="category-info">
-                        <h3>Fancy Envelop Collection</h3>
-                        <p>Wrap Your Blessings in Elegance – Explore Our Designer Envelopes for Every Occasion.</p>
-                        <a href="Shop.html?category=wedding" class="btn">Shop Now</a>
+                        <h3>Birthday Items</h3>
+                        
                     </div>
                 </div>
                 <div class="category-card">
-                    <img src="images/Baat_Pakki/Product1.jpg" alt="Baat Pakki Collection" class="category-img">
+                    <img src="images/Section/pic3.webp" alt="Baat Pakki Collection" class="category-img">
                     <div class="category-info">
-                        <h3>Baat Pakki Collection</h3>
-                        <p>Seal the Promise with Style – Elegant Decor & Gifts for Baat Pakki Ceremonies.</p>
-                        <a href="Shop.html?category=baat" class="btn">Shop Now</a>
+                        <h3>Festivals Items</h3>
+                        
                     </div>
             </div>
-
         </section>
-        <section id="categories" data-aos="fade-left" data-aos-delay="200">
-            <div class="categories">
-                <div class="category-card">
-                    <img src="images/Date_Fix/Product1.jpg" alt="Date Fix Collection" class="category-img">
-                    <div class="category-info">
-                        <h3>Date Fix Collection</h3>
-                        <p>Fix the Date, Frame the Moment – Premium Decor & Accessories for Your Big Announcement.</p>
-                        <a href="Shop.html?category=date" class="btn">Shop Now</a>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <img src="images/Hajj/ProductC.jpg" alt="Hajj" class="category-img">
-                    <div class="category-info">
-                        <h3>Hajj Collection</h3>
-                        <p>Purity, Peace & Purpose – Essentials for a Spiritual Journey.</p>
-                        <a href="Shop.html?category=hajj" class="btn">Shop Now</a>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <img src="images/Nikkah/Product5.jpg" alt="Nikkah Item Collections" class="category-img">
-                    <div class="category-info">
-                        <h3>Nikkah Item Collection</h3>
-                        <p>Sacred Beginnings, Styled Beautifully – Discover Premium Nikkah Decor & Essentials.</p>
-                        <a href="Shop.html?category=nikkah" class="btn">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
 
         <!-- Services Section -->
         <section class="services" data-aos="zoom-in" data-aos-delay="200">
@@ -1035,35 +859,6 @@
     });
   </script>
 
-<!-- Discount Pop-up Modal -->
-<div class="discount-popup" id="discountPopup">
-  <div class="discount-popup-content">
-    <button class="close-popup" onclick="closeDiscountPopup()">&times;</button>
-
-    <div class="popup-inner">
-      <h2 class="popup-title">🎉 Exclusive Offer Just for You!</h2>
-      <p class="popup-subtitle">Subscribe now and get <strong>10% OFF</strong> your first order!</p>
-      
-      <input type="email" placeholder="Enter your email address" class="popup-input" required>
-      <button class="popup-btn">Get My Discount</button>
-
-      <p class="popup-note">Limited time only. Don't miss out!</p>
-    </div>
-  </div>
-</div>
-
-<script>
-  window.addEventListener('load', function () {
-    setTimeout(function () {
-      document.getElementById('discountPopup').style.display = 'flex';
-    }, 10000); // show after 10 seconds
-  });
-
-  function closeDiscountPopup() {
-    document.getElementById('discountPopup').style.display = 'none';
-  }
-</script>
-
 <!-- AOS JS -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
@@ -1075,4 +870,3 @@
 
 </body>
 </html>
- 
