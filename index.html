@@ -329,7 +329,130 @@
   background-image: url('images/main.avif');
 }
   </style>
-    
+    <style>
+  @media (max-width: 768px) {
+    /* Fix top mobile header layout */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 15px;
+      background-color: #2c6eee;
+      color: white;
+    }
+
+    .mobile-header .logo span {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #FFD700;
+    }
+
+    .mobile-header .fa-bars,
+    .mobile-header .fa-cart-shopping {
+      font-size: 1.2rem;
+    }
+
+    /* Prevent horizontal overflow */
+    body {
+      overflow-x: hidden;
+      padding-bottom: 80px; /* for mobile nav */
+    }
+
+    html {
+      overflow-x: hidden;
+    }
+
+    /* Resize fonts and buttons */
+    .hero-section h2,
+    .hero-title {
+      font-size: 1.8rem !important;
+      line-height: 2.2rem;
+    }
+
+    .hero-section p,
+    .hero-text {
+      font-size: 1rem;
+      padding: 0 10px;
+    }
+
+    .category-slider-title {
+      font-size: 1.5rem;
+      padding: 0 10px;
+    }
+
+    .shop-btn {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+
+    .overlay h3 {
+      font-size: 1.1rem;
+    }
+
+    /* Container padding fixes */
+    .container,
+    section,
+    .location-section,
+    .testimonial-gallery-section,
+    .newsletter-section {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    /* Adjust footer */
+    .footer-container {
+      flex-direction: column;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .footer-column {
+      width: 100%;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #2c6eee;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 999;
+    }
+
+    .mobile-nav a {
+      color: white;
+      text-align: center;
+      font-size: 0.75rem;
+    }
+
+    .mobile-nav i {
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    /* WhatsApp bubble position fix */
+    .whatsapp-chat {
+      bottom: 90px !important;
+      right: 10px !important;
+    }
+
+    /* Fix category card height */
+    .category-card {
+      height: 200px !important;
+    }
+
+    .navbar-top {
+      display: none !important;
+    }
+
+    .navbar-bottom nav {
+      display: none !important;
+    }
+  }
+</style>
     
   </head>
   <body>
