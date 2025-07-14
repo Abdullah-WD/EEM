@@ -12,13 +12,14 @@
 }
 
  body {
+  background-color: #fefaee;
       margin: 0;
       font-family: 'Roboto', sans-serif;
       background: #f9f9f9;
     }
 
     .navbar {
-      background: #002366;
+      background: #2c6eee;
       color: #fff;
       font-size: 16px;
     }
@@ -68,7 +69,7 @@
     }
 
     .search-bar button {
-      background: #FFD700;
+      background: #f2ca2c;
       color: #000;
       font-weight: bold;
       border-top-right-radius: 4px;
@@ -100,7 +101,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #002366;
+      background: #2c6eee;
       padding: 10px 30px;
     }
 
@@ -116,7 +117,7 @@
     }
 
     .navbar-bottom nav a:hover {
-      color: #FFD700;
+      color: #f2ca2c;
     }
 
     /* For mobile and tablet screens (max-width: 991px) */
@@ -131,7 +132,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background: #002366;
+    background: #2c6eee;
   }
 
   .mobile-nav {
@@ -139,7 +140,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #002366;
+    background: #2c6eee;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
@@ -177,7 +178,7 @@
     left: -75%;
     width: 75%;
     height: 100%;
-    background: #002366;
+    background: #2c6eee;
     transition: left 0.3s ease;
     z-index: 999;
     padding-top: 60px;
@@ -210,13 +211,14 @@
 
 
 body {
+  background-color: #fefaee;
   margin: 0;
   font-family: 'Roboto', sans-serif;
   background: #f9f9f9;
 }
 
 .navbar {
-  background: #002366;
+  background: #2c6eee;
   color: #fff;
   font-size: 16px;
   padding: 17px;
@@ -268,7 +270,7 @@ body {
 }
 
 .search-bar button {
-  background: #FFD700;
+  background: #f2ca2c;
   border: none;
   padding: 8px 15px;
   cursor: pointer;
@@ -304,7 +306,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #002366;
+  background: #2c6eee;
   padding: 10px 30px;
 }
 
@@ -320,7 +322,7 @@ body {
 }
 
 .navbar-bottom nav a:hover {
-  color: #FFD700;
+  color: #f2ca2c;
 }
 
 /* Ensure mobile-header is hidden on desktop */
@@ -460,7 +462,7 @@ body {
         }
         
         .subscribe-btn {
-            background-color: #002366;
+            background-color: #2c6eee;
             color: white;
             border: none;
             padding: 12px 30px;
@@ -508,13 +510,14 @@ body {
 
         /* Base Styles */
         body {
+          background-color: #fefaee;
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
         }
         
         .footer {
-            background-color: #002366;
+            background-color: #2c6eee;
             padding: 40px 20px;
             color: #333;
             max-width: 1200px;
@@ -537,7 +540,7 @@ body {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 20px;
-            color: #FFD700;
+            color: #f2ca2c;
             text-transform: uppercase;
         }
         
@@ -580,7 +583,7 @@ body {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 15px;
-            color: #FFD700;
+            color: #f2ca2c;
         }
         
         /* Responsive Adjustments */
@@ -626,6 +629,7 @@ body {
 
         /* General Styles */
         body {
+          background-color: #fefaee;
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
@@ -699,7 +703,7 @@ body {
         }
         
         .send-button {
-            background-color: #002366;
+            background-color: #2c6eee;
             color: white;
             border: none;
             padding: 12px 20px;
@@ -712,7 +716,7 @@ body {
         }
         
         /* .send-button:hover {
-            background-color: #002366;
+            background-color: #2c6eee;
         } */
         
         /* Footer Styles (example) */
@@ -725,6 +729,7 @@ body {
         
         /* Global Styles */
         body {
+          background-color: #fefaee;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
@@ -786,7 +791,7 @@ body {
         }
         
         .benefit-card h3 {
-            color: #FFD700;
+            color: #f2ca2c;
             margin-top: 0;
         }
         
@@ -820,8 +825,8 @@ body {
         }
         
         .submit-btn {
-            background: #002366;
-            color: #FFD700;
+            background: #2c6eee;
+            color: #f2ca2c;
             border: none;
             padding: 12px 30px;
             font-size: 16px;
@@ -839,6 +844,7 @@ body {
 
                 /* Global Styles */
         body {
+          background-color: #fefaee;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
@@ -896,7 +902,7 @@ body {
         }
         
         .about-text h2 {
-            color: #002366;
+            color: #2c6eee;
             margin-top: 0;
         }
         .about-text p{
@@ -942,8 +948,8 @@ body {
         
         .cta-button {
             display: inline-block;
-            background: #002366;
-            color: #FFD700  ;
+            background: #2c6eee;
+            color: #f2ca2c;
             padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
@@ -967,7 +973,7 @@ body {
         }
 
         body {
-            background-color: #f9f9f9;
+            background-color: #fefaee;
             color: #333;
             line-height: 1.6;
         }
@@ -1011,7 +1017,7 @@ body {
 
         .btn {
             display: inline-block;
-            background-color: #002366;
+            background-color: #2c6eee;
             color: white;
             padding: 12px 30px;
             border-radius: 30px;
@@ -1134,7 +1140,7 @@ body {
 
         /* Services Section */
         .services {
-            background-color: #002366;
+            background-color: #2c6eee;
             color: white;
             padding: 60px 0;
             margin-bottom: 60px;
@@ -1234,6 +1240,7 @@ body {
 
 /* Social Media icons */
    body {
+    background-color: #fefaee;
   margin: 0;
   padding: 0;
 } 
