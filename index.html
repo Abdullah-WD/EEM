@@ -329,6 +329,174 @@
   background-image: url('images/main.avif');
 }
   </style>
+    <style>
+  @media (max-width: 768px) {
+    /* Fix top mobile header layout */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 15px;
+      background-color: #2c6eee;
+      color: white;
+    }
+
+    .mobile-header .logo span {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f2ca2c;
+    }
+
+    .mobile-header .fa-bars,
+    .mobile-header .fa-cart-shopping {
+      font-size: 1.2rem;
+    }
+
+    /* Prevent horizontal overflow */
+    body {
+      overflow-x: hidden;
+      padding-bottom: 80px; /* for mobile nav */
+    }
+
+    html {
+      overflow-x: hidden;
+    }
+
+    /* Resize fonts and buttons */
+    .hero-section h2,
+    .hero-title {
+      font-size: 1.8rem !important;
+      line-height: 2.2rem;
+    }
+
+    .hero-section p,
+    .hero-text {
+      font-size: 1rem;
+      padding: 0 10px;
+    }
+
+    .category-slider-title {
+      font-size: 1.5rem;
+      padding: 0 10px;
+    }
+
+    .shop-btn {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+
+    .overlay h3 {
+      font-size: 1.1rem;
+    }
+
+    /* Container padding fixes */
+    .container,
+    section,
+    .location-section,
+    .testimonial-gallery-section,
+    .newsletter-section {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    /* Adjust footer */
+    .footer-container {
+      flex-direction: column;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .footer-column {
+      width: 100%;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #2c6eee;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 999;
+    }
+
+    .mobile-nav a {
+      color: white;
+      text-align: center;
+      font-size: 0.75rem;
+    }
+
+    .mobile-nav i {
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    /* WhatsApp bubble position fix */
+    .whatsapp-chat {
+      bottom: 90px !important;
+      right: 10px !important;
+    }
+
+    /* Fix category card height */
+    .category-card {
+      height: 200px !important;
+    }
+
+    .navbar-top {
+      display: none !important;
+    }
+
+    .navbar-bottom nav {
+      display: none !important;
+    }
+  }
+</style>
+
+<!-- ✅ Responsive fix styles added here: -->
+  <style>
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    html, body {
+      overflow-x: hidden;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .main-wrapper {
+        padding: 0 10px;
+      }
+      .hero,
+      .categories,
+      .services,
+      .testimonial-gallery-section,
+      .newsletter-section,
+      .location-section {
+        text-align: center;
+      }
+      .categories,
+      .services-container,
+      .testimonial-gallery,
+      .location-info {
+        justify-content: center !important;
+      }
+      .category-card,
+      .service-item,
+      .info-card,
+      .testimonial-image-box {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+
     
   </head>
   <body>
@@ -581,32 +749,182 @@
             </div>
         </section>
 
-        <!-- Featured Categories -->
-        <section id="categories" data-aos="fade-right" data-aos-delay="200">
-            <h2 class="section-title">Our Event Categories</h2>
-            <div class="categories">
-                <div class="category-card">
-                    <img src="images/Section/pic1.jpg" alt="Mehndi Item Collection" class="category-img">
-                    <div class="category-info">
-                        <h3>Wedding Items</h3>
-                        
-                    </div>
-                </div>
-                <div class="category-card">
-                    <img src="images/Section/pic2.jpg" alt="Fancy Envelop Collection" class="category-img">
-                    <div class="category-info">
-                        <h3>Birthday Items</h3>
-                        
-                    </div>
-                </div>
-                <div class="category-card">
-                    <img src="images/Section/pic3.webp" alt="Baat Pakki Collection" class="category-img">
-                    <div class="category-info">
-                        <h3>Festivals Items</h3>
-                        
-                    </div>
+        <!-- Shop By Categories -->
+<section id="categories" class="shop-categories" data-aos="fade-right" data-aos-delay="200">
+    <h2 class="section-title">Shop By Categories</h2>
+    <div class="categories-container">
+        <div class="category-card">
+            <div class="category-img-container">
+                <img src="images/Section/pic1.jpg" alt="Wedding Items" class="category-img">
+                <div class="category-overlay"></div>
             </div>
-        </section>
+            <div class="category-info">
+                <h3>Wedding Items</h3>
+            </div>
+        </div>
+        <div class="category-card">
+            <div class="category-img-container">
+                <img src="images/Section/pic2.jpg" alt="Birthday Items" class="category-img">
+                <div class="category-overlay"></div>
+            </div>
+            <div class="category-info">
+                <h3>Birthday Items</h3>
+            </div>
+        </div>
+        <div class="category-card">
+            <div class="category-img-container">
+                <img src="images/Section/pic3.webp" alt="Festival Items" class="category-img">
+                <div class="category-overlay"></div>
+            </div>
+            <div class="category-info">
+                <h3>Festival Items</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Shop By Categories Section */
+    .shop-categories {
+        padding: 4rem 2rem;
+        background-color: #f9f9f9;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+        position: relative;
+    }
+    
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #ff6b6b;
+        margin: 10px auto;
+    }
+    
+    .categories-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    .category-card {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+        aspect-ratio: 1/1; /* Makes cards square */
+    }
+    
+    .category-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .category-img-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+    
+    .category-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        border-radius: 15px;
+    }
+    
+    .category-card:hover .category-img {
+        transform: scale(1.1);
+    }
+    
+    .category-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        border-radius: 15px;
+    }
+    
+    .category-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        color: white;
+        z-index: 1;
+    }
+    
+    .category-info h3 {
+        font-size: 1.8rem;
+        margin: 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .categories-container {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .category-info h3 {
+            font-size: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .shop-categories {
+            padding: 3rem 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .categories-container {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .category-card {
+            aspect-ratio: 3/2; /* Wider aspect ratio for mobile */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .shop-categories {
+            padding: 2rem 1rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+        }
+        
+        .category-info h3 {
+            font-size: 1.3rem;
+            padding: 1rem;
+        }
+    }
+</style>
 
         <!-- Services Section -->
         <section class="services" data-aos="fade-left" data-aos-delay="200">
@@ -865,6 +1183,221 @@
     duration: 800,
     once: true
   });
+</script>
+
+<!-- Discount Popup HTML (place before </body>) -->
+<div id="discountPopup" class="discount-popup">
+  <div class="popup-container">
+    <div class="popup-header">
+      <span class="discount-badge">20% OFF</span>
+      <button class="close-popup">&times;</button>
+    </div>
+    <div class="popup-content">
+      <div class="popup-icon">🎁</div>
+      <h3>Exclusive Offer Just For You!</h3>
+      <p>Subscribe now and get <strong>20% discount</strong> on your first order.</p>
+      <form class="popup-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Claim My Discount</button>
+      </form>
+      <p class="small-text">We respect your privacy. Unsubscribe at any time.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Discount Popup CSS - Self-contained */
+.discount-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  animation: fadeIn 0.4s ease;
+}
+
+.popup-container {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.discount-popup.show .popup-container {
+  transform: scale(1);
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #2c6eee;
+}
+
+.discount-badge {
+  background: white;
+  color: #f2ca2c;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.close-popup {
+  background: #fff;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #2c6eee;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.close-popup:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+.popup-content {
+  padding: 30px;
+  text-align: center;
+}
+
+.popup-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+  animation: bounce 2s infinite;
+}
+
+.popup-content h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.popup-content p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.popup-form input {
+  width: 100%;
+  padding: 14px 20px;
+  margin-bottom: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s;
+}
+
+.popup-form input:focus {
+  border-color: #ff9a9e;
+  outline: none;
+}
+
+.popup-form button {
+  width: 100%;
+  padding: 15px;
+  background: #2c6eee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.popup-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255,154,158,0.4);
+}
+
+.small-text {
+  font-size: 12px;
+  color: #999;
+  margin-top: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-15px);}
+  60% {transform: translateY(-7px);}
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .popup-content {
+    padding: 25px 20px;
+  }
+  
+  .popup-content h3 {
+    font-size: 20px;
+  }
+  
+  .popup-icon {
+    font-size: 40px;
+  }
+  
+  .popup-form input,
+  .popup-form button {
+    padding: 12px 15px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const popup = document.getElementById('discountPopup');
+  
+  // Show after 10 seconds (changed from 3 to 10 seconds)
+  setTimeout(() => {
+    popup.style.display = 'flex';
+    setTimeout(() => popup.classList.add('show'), 10);
+  }, 10000); // 10000 milliseconds = 10 seconds
+  
+  // Close functionality
+  document.querySelector('.close-popup').addEventListener('click', closePopup);
+  popup.addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+  
+  // Form submission
+  document.querySelector('.popup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input').value.trim();
+    if (email) {
+      alert(`🎉 Discount code "WELCOME20" has been sent to ${email}`);
+      closePopup();
+    }
+  });
+  
+  function closePopup() {
+    popup.classList.remove('show');
+    setTimeout(() => popup.style.display = 'none', 300);
+  }
+});
 </script>
 
 </body>
