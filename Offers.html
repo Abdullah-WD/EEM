@@ -164,14 +164,14 @@
     }
 
     .badge {
-  background: 700#f2ca2c;
+  background: #f2ca2c;
   color: #000;
   font-size: 0.5rem;
   border-radius: 50%;
   padding: 0.2rem 0.4rem;
   position: absolute;
-  top: 30px;
-  right: 21px;
+  top: 22px;
+  right: 12px;
   display: none;
 }
 
@@ -435,14 +435,22 @@
     const countdownTimer = setInterval(updateCountdown, 1000);
 
     // Newsletter Form Submission
-    document.querySelector('.newsletter-form button').addEventListener('click', function() {
-      const email = document.querySelector('.newsletter-form input').value;
+    document.addEventListener('DOMContentLoaded', () => {
+  const subscribeButton = document.querySelector('.newsletter-form button');
+  const emailInput = document.querySelector('.newsletter-form input');
+
+  if (subscribeButton && emailInput) {
+    subscribeButton.addEventListener('click', function() {
+      const email = emailInput.value.trim();
       if (email && email.includes('@')) {
-        alert('Thank you for subscribing! We\'ll notify you when our offers go live.');
-        document.querySelector('.newsletter-form input').value = '';
+        alert("Thank you for subscribing! We'll notify you when our offers go live.");
+        emailInput.value = '';
       } else {
         alert('Please enter a valid email address.');
       }
+    });
+  }
+
     });
   </script>
 
